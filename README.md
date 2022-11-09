@@ -9,6 +9,18 @@ Python can automate simple tasks:
 - Automate emails and text messages
 - Fill out forms
 
+Python can do data science and machine learning tasks:
+- Analyze large data files
+- Create visualizations
+- Perform machine learning tasks
+- Create and run predictive algorithms
+
+Python can create websites:
+- Use web frameworks such as Django and Flask to handle the backend of a website and user data
+- Create interactive dashboards for users
+
+## Installing Python
+To install Python, here we will use the free Individual Anaconda distribution - it includes Python and many other useful libraries, including Jupyter Notebook env. 
 
 
 
