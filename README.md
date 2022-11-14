@@ -33,9 +33,19 @@ There are also many free "No Install" options to run Python code:
 
 The drawback of the "No Install" options are, it is hard to upload your own code, data or notebooks, also, they may not save your code in the free version. 
 
+## Running Python Code
+3 main types of development environments: 
+- Text editors: most are not designed with Python in mind, usually free, such as Sublime Text and Atom
+- Full IDEs: designed specifically for Python, only community editions are free, pro version has a lot of extra functionality, such as PyCharm and Spyder
+- Notebook environments: Great for learning, can see input and output next to each other. Support in-line markdown notes, visualizations, videos, etc. Special file formats that are .ipynb, instead of .py. Most popular is Jupyter Notebook. It is getting more and more popular with machine learning and data science. 
 
+The example python code: 
+```py
+print("Hello world")
+```
+And save it as test.py file. To run it, use `python test.py`. 
 
-
+To run code in Jupyter Notebook, you can open a XXX.py file and edit it in the browser. But is it not very convenient. The notebook system is good though. You can rename the notebook in the browser in the opened notebook page. When you create a new cell, it defaults to a Code cell, but you can click on the drop down in the UI and change it to a Markdown cell for simple text. You have to open the .ipynb files using the jupyter notebook system. 
 
 
 
