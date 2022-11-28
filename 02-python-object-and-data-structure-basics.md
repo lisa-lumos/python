@@ -38,10 +38,13 @@ Index:         0  1  2  3  4
 Reverse Index: 0 -1 -3 -2 -1
 ```
 
-Indexing and Slicing with Strings. See notebook. 
+### Indexing and Slicing with Strings
+See notebook. 
 
+### String Properties and Methods
+See notebook. 
 
-
+### Print formatting with strings
 
 
 
