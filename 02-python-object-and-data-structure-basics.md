@@ -45,6 +45,9 @@ See notebook.
 See notebook. 
 
 ### Print formatting with strings
+See notebook. 
+
+### Lists in Python
 
 
 
