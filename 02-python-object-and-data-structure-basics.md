@@ -48,9 +48,9 @@ See notebook.
 See notebook. 
 
 ### Lists in Python
+Lists are ordered sequences that can hold a variety of object types. They use [] brackets and commas to separate objects in the list. [1, 2, 3, 4, 5]. Lists support indexing and slicing. Lists can be nested an also have a variety of useful methods than can be called off of them. 
 
-
-
+See notebook. 
 
 
 
