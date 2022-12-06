@@ -52,6 +52,15 @@ Lists are ordered sequences that can hold a variety of object types. They use []
 
 See notebook. 
 
+### Dictionaries in Python
+Dictionaries are unordered mappings (key-value pairs). They cannot be sorted. 
+
+### Tuples
+Tuples are very similar to lists, but tuples are immutable. Once an element is assigned to a index position inside a tuple, it cannot be reassigned. 
+
+When you pass objects in code, to make sure it doesn't get accidentally changes, use tuples. 
+
+
 
 
 
