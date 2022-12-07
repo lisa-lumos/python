@@ -60,8 +60,10 @@ Tuples are very similar to lists, but tuples are immutable. Once an element is a
 
 When you pass objects in code, to make sure it doesn't get accidentally changes, use tuples. 
 
+### Sets in Python
+Unordered collections of unique elements. 
 
-
+### Booleans
 
 
 
