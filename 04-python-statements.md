@@ -3,5 +3,6 @@
 ## for loops
 ## while loops
 ## useful operators in Python
+## List Comprehensions
 
 see jupiter notebook. 
