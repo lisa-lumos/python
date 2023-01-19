@@ -11,7 +11,9 @@ class NameOfClass():
     print(self.param1)
 ```
 
+Inheritance: form new classes using classes that have already been defined. 
 
+Polymorphism: different classes can share the same method name, and the methods can be called from the same place, even though different objects can be passed in. 
 
 
 
