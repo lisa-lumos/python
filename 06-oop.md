@@ -15,7 +15,7 @@ Inheritance: form new classes using classes that have already been defined.
 
 Polymorphism: different classes can share the same method name, and the methods can be called from the same place, even though different objects can be passed in. 
 
-
+Special methods allow us to use built in operations in Python, such as length function, or print function, with user created objects. 
 
 
 
