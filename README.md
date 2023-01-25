@@ -6,6 +6,7 @@
 ## 4. Python Statements
 ## 5. Methods and Functions
 ## 6. OOP
+## 7. Modules and packages
 
 
 

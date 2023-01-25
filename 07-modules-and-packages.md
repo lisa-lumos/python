@@ -34,12 +34,14 @@ Modules are just .py scripts that you call in another .py script. Packages are a
 
 Create an empty "__init__.py" file in both the main package folder and the sub package folder. 
 
-For details, refer to the package-example folder in this repo. 
+For details, refer to the package-example folder in the examples folder in this repo. 
 
+## `if __name__ == "__main__"` at the bottom of a script
+Sometimes, when you import from a module, you want to know whether this module's functions are being used as an import, or if you are running the original .py file of this module directly. 
 
+In Python, there is no main() function to call at the top of the script, instead, all code at indentation level 0 get to run. There is a built in variable `__name__`, if you run a code in the terminal `python one.py`, then this var is automatically set as `__name__ = "__main__"`. Then if you can use `if __name__ == "__main__"` to check whether this file is run directly, and if so, you can use the defined function inside this if clause. 
 
-
-
+For details, refer to the example 3 in examples folder in this repo. 
 
 
 
