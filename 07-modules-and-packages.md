@@ -29,6 +29,13 @@ switch to green
 
 Use Google to search packages based on your needs. 
 
+## Modules
+Modules are just .py scripts that you call in another .py script. Packages are a collection of modules. 
+
+Create an empty "__init__.py" file in both the main package folder and the sub package folder. 
+
+For details, refer to the package-example folder in this repo. 
+
 
 
 
