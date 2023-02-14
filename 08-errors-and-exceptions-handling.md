@@ -67,9 +67,49 @@ examples/04-unit-testing/simple2.py:2:21: C0303: Trailing whitespace (trailing-w
 Your code has been rated at 8.33/10
 ```
 
+To do a unit test for a function in cap.py:
+```python
+def cap_text(text):
+    '''
+    Input a string
+    Output the capitalized string
+    '''
+    # return text.capitalize()
+    return text.title()
 
+```
 
+Create a testing file test_cap.py:
+```
+import unittest
+import cap
 
+class TestCap(unittest.TestCase):
+    def test_one_word(self):
+        text = 'python'
+        result = cap.cap_text(text)
+        self.assertEqual(result, 'Python')
+
+    def test_multiple_words(self):
+        text = 'monty python'
+        result = cap.cap_text(text)
+        self.assertEqual(result, 'Monty Python')
+
+if __name__ == '__main__':
+    unittest.main()
+
+```
+
+Run it in terminal, it shows that is passed both of the tests:
+```console
+(base) lisa@mac16 python % /opt/homebrew/bin/python3.11 /Users/lisa/Deskto
+p/python/examples/04-unit-testing/test_cap.py
+..
+----------------------------------------------------------------------
+Ran 2 tests in 0.000s
+
+OK
+```
 
 
 
