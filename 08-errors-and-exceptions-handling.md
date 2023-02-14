@@ -102,8 +102,7 @@ if __name__ == '__main__':
 
 Run it in terminal, it shows that is passed both of the tests:
 ```console
-(base) lisa@mac16 python % /opt/homebrew/bin/python3.11 /Users/lisa/Deskto
-p/python/examples/04-unit-testing/test_cap.py
+(base) lisa@mac16 python % /opt/homebrew/bin/python3.11 /Users/lisa/Desktop/python/examples/04-unit-testing/test_cap.py
 ..
 ----------------------------------------------------------------------
 Ran 2 tests in 0.000s
