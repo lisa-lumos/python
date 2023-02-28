@@ -55,13 +55,35 @@ def hello(name='lisa'):
 my_new_func = hello('lisa')
 my_new_func()
 
+def hello():
+    return "Hi lisa"
 
+# pass a function into a new function
+def other(some_func):
+    print(some_func())
 
+other(hello) # prints "Hi lisa"
 
+def new_decorator(original_func):
+    def wrap_func():
+        print('Some new code before the original function')
+        original_func()
+        print('Some new code after the original function')
+    return wrap_func
 
+def func_needs_decorator():
+    print("I want to be decorated! ")
+
+decorated_func = new_decorator(func_needs_decorator)
+decorated_func() # runs the new function
+
+@new_decorator # this passes the below function into the previously defined new_decorator() function. If want to remove the decorations later on, just comment this line. 
+def func_needs_decorator(): # This is the one that will be wrapped around
+    print("I want to be decorated! ")
+func_needs_decorator() # runs the new function
 ```
 
-
+Realistically, you will not write the new_decorator function. Instead, you will be using a web framework or someone else's library, and only need to prepend the `@new_decorator` row to render a new website or point to another page. It is commonly used in web frameworks such as Django or Flask. 
 
 
 
