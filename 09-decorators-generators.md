@@ -1,4 +1,6 @@
 # 9. Python Decorators and Generators
+
+## Decorators
 Decorators allow you to decorate a function (turn on/off extra functionality to an already existing function). They use the @ operator are then placed on top of the original function. 
 
 ```py
@@ -85,12 +87,12 @@ func_needs_decorator() # runs the new function
 
 Realistically, you will not write the new_decorator function. Instead, you will be using a web framework or someone else's library, and only need to prepend the `@new_decorator` row to render a new website or point to another page. It is commonly used in web frameworks such as Django or Flask. 
 
+## Generators
+Generator functions allow us to write a function that can send back a value and then automatically resume to pick up where it left off. In this way, we can generate a sequence of values over time. => more memory efficient. 
 
+The advantage: instead of having to compute an entire series of values up front, the generator computes one value, and waits until the next values is called for. 
 
-
-
-
-
+This is what range() function does. It keeps track of the last number and the step size, to provide a flow of numbers. It doesn't produce a giant list at once in memory. If a user does need the list, they need to transform the generator to a list, like `list(range(0, 10))`. 
 
 
 
