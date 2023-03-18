@@ -34,7 +34,38 @@ print(sammy[1]) # Husky
 
 ```
 
-## OS module and Datetime
+## OS module
+Opening and reading files and folders. 
+```py
+f = open('practice.txt', 'w+')
+f.write('This is a test string')
+f.close()
+
+import os
+print(os.getcwd()) # returns current working directory
+print(os.listdir()) # returns list of items as strings in cur dir
+print(os.listdir('/Users/lisa/Desktop')) # returns list of items as strs in this dir
+os.unlink('practice.txt') # permanently delete this file
+os.rmdir('/Users/lisa/Desktop/my_folder') # permanently delete this folder
+# recursively visit each nested dirs and files in this folder
+for folder, sub_folders, files in os.walk('/Users/lisa/Desktop/my_folder'):
+    print(f"Currently looking at {folder}\n")
+    print('The subfolders are: ')
+    for sub_folder in sub_folders:
+        print(f'\t Subfolder: {sub_folder}')
+    print('\nThe files are:')
+    for f in files:
+        print(f'\t File: {f}')
+
+import shutil
+shutil.move('practice.txt', '/Users/lisa/Desktop') # move this file to this folder
+shutil.rmtree('/Users/lisa/Desktop/my_folder') # permanently delete all files and folders in this folder
+
+import send2trash # pip install send2trash
+send2trash.send2trash('practice.txt') # sends file to trash bin, instead of permanent removal
+```
+
+## Datetime
 
 ## Math and Random
 
