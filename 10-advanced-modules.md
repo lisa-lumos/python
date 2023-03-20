@@ -66,6 +66,42 @@ send2trash.send2trash('practice.txt') # sends file to trash bin, instead of perm
 ```
 
 ## Datetime
+Useful when dealing with databases. 
+```python
+import datetime
+my_time = datetime.time(2, 20) # hr, min, second, microsecond in 24 hr format
+print(my_time.minute) # 20
+print(my_time.hour) # 2
+print(my_time) # 02:20:00
+
+my_time = datetime.time(13, 20, 1, 20)
+print(my_time) # 13:20:01.000020
+print(type(my_time)) # <class 'datetime.time'>
+
+today = datetime.date.today()
+print(today) # 2023-03-20
+print(today.year) # 2023
+print(today.ctime()) # Mon Mar 20 00:00:00 2023
+
+from datetime import datetime
+my_datetime = datetime(2023, 3, 20, 15, 46, 12)
+print(my_datetime) # 2023-03-20 15:46:12
+my_datetime = my_datetime.replace(year=2024)
+print(my_datetime) # 2024-03-20 15:46:12
+
+from datetime import date
+date1 = date(2023, 3, 20)
+date2 = date(2024, 4, 20)
+print(date2 - date1) # 397 days, 0:00:00
+print(type(date2 - date1)) # <class 'datetime.timedelta'>
+
+datetime1 = datetime(2023, 3, 20, 3)
+datetime2 = datetime(2024, 4, 20, 4)
+print(datetime2 - datetime1) # 397 days, 1:00:00
+print(type(datetime2 - datetime1)) # <class 'datetime.timedelta'>
+print((datetime2 - datetime1).total_seconds()) # 34304400.0
+```
+
 
 ## Math and Random
 
