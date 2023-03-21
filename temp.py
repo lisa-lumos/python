@@ -137,22 +137,41 @@
 # print(type(datetime2 - datetime1)) # <class 'datetime.timedelta'>
 # print((datetime2 - datetime1).total_seconds()) # 34304400.0
 
+# import math
+# value = 4.35
+# print(math.floor(value)) # 4
+# print(math.ceil(value)) # 5
+# print(round(4.5)) # 4 (round toward the even number if half way)
+# print(round(5.5)) # 6 (round toward the even number if half way)
+# print(math.pi) # 3.141592653589793
+# print(math.e) # 2.718281828459045
+# print(math.log(math.e)) # 1.0
+# print(math.log(100, 10)) # 2.0
+# print(math.inf) # inf
+# print(math.nan) # nan
+# print(math.sin(10)) # -0.5440211108893698
+# print(math.degrees(math.pi/2)) # 90.0
+# print(math.radians(180)) # 3.141592653589793
 
+# from math import pi
+# print(pi) # 3.141592653589793
 
+# import random
+# print(random.randint(0, 100)) # return an int within [0, 100]
+# random.seed(42) # if start with a fixed seed, will always use the same rand vals, no matter how many times you run it
+# print(random.randint(0, 100)) # 81
+# print(random.randint(0, 100)) # 14
+# print(random.randint(0, 100)) # 3
 
+# my_list = list(range(0, 20))
+# print(random.choice(my_list)) # randomly choose a val from my_list
 
-
-
-
-
-
-
-
-
-
-
-
-
+# print(random.choices(population=my_list, k=10)) # sample 10 elems with replacement
+# print(random.sample(population=my_list, k=10)) # sample 10 elems without replacement
+# random.shuffle(my_list) # shuffle the list in place
+# print(my_list)
+# print(random.uniform(a=0, b=100)) # choose a real number between a and b, each number have same likelihood of being chosen
+# print(random.gauss(mu=0, sigma=1)) # choose a real number between a and b, distribution is gauss distribution
 
 
 
