@@ -173,6 +173,64 @@
 # print(random.uniform(a=0, b=100)) # choose a real number between a and b, each number have same likelihood of being chosen
 # print(random.gauss(mu=0, sigma=1)) # choose a real number between a and b, distribution is gauss distribution
 
+# import pdb
+# x = [1, 2, 3]
+# y = 2
+# z = 3
+# result = y + z
+# pdb.set_trace() # set the trace before error line, press q to quit debugger
+# # command line:
+# # (Pdb) result
+# # 5
+# # (Pdb) y
+# # 2
+# # (Pdb) x
+# # [1, 2, 3]
+# result2 = x + y # should get an error, cannot add integer to a list
+
+# text = "The agent's phone number is 408-555-1234. Call soon!"
+# print('phone' in text) # returns True
+
+# import re
+# pattern = 'not in text'
+# print(re.search(pattern, text)) # None
+# pattern = 'phone'
+# print(re.search(pattern, text)) # <re.Match object; span=(12, 17), match='phone'>
+# match = re.search(pattern, text) # will only get the first match
+# print(match.span()) # (12, 17)
+# print(match.start()) # 12
+# print(match.end()) # 17
+
+# text = "phone once, phone twice"
+# matches = re.findall('phone', text) # find all patterns in a string
+# print(matches) # ['phone', 'phone']
+# for match in re.finditer('phone', text): # find each match
+#     print(match)
+# # returns: 
+# # <re.Match object; span=(0, 5), match='phone'>
+# # <re.Match object; span=(12, 17), match='phone'>
+
+# import re
+# text = 'My phone number is 123-456-7890'
+# phone = re.search('123-456-7890', text)
+# print(phone) # <re.Match object; span=(19, 31), match='123-456-7890'>
+# phone = re.search(r'\d\d\d-\d\d\d-\d\d\d\d', text) # need r before string pattern
+# print(phone) # <re.Match object; span=(19, 31), match='123-456-7890'>
+# print(phone.group()) # 123-456-7890
+
+# phone = re.search(r'\d{3}-\d{3}-\d{4}', text) # need r before string pattern
+# print(phone) # <re.Match object; span=(19, 31), match='123-456-7890'>
+# print(phone.group()) # 123-456-7890
+
+# phone_pattern = re.compile(r'(\d{3})-(\d{3})-(\d{4})') # '()-()-()' groups 3 regex
+# results = re.search(phone_pattern, text)
+# print(results.group()) # 123-456-7890
+# # access each of the 3 groups, idx starts from 1: 
+# print(results.group(1)) # 123
+# print(results.group(2)) # 456
+# print(results.group(3)) # 7890
+
+
 
 
 

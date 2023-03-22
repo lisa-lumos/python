@@ -142,10 +142,88 @@ print(random.gauss(mu=0, sigma=1)) # choose a real number between a and b, distr
 ```
 
 ## Python Debugger
+Python comes with a built-in debugger tool that allows you to interactively explore variables within mid-operation of your Python code. A trace allow you to see the variables before the trace. 
+```py
+import pdb
+x = [1, 2, 3]
+y = 2
+z = 3
+result = y + z
+pdb.set_trace() # set the trace before error line, press q to quit debugger
+# command line:
+# (Pdb) result
+# 5
+# (Pdb) y
+# 2
+# (Pdb) x
+# [1, 2, 3]
+result2 = x + y # should get an error, cannot add integer to a list
+```
+## Regular Expressions
+Regular expressions (regex) can be used for general patterns in text data. For example, for a phone number `(555)-555-5555`, its regex pattern is `r"(\d\d\d)-\d\d\d-\d\d\d\d"`, or `r"(\d{3})-\d{3}-d{4}"`. 
+```py
+text = "The agent's phone number is 408-555-1234. Call soon!"
+print('phone' in text) # returns True
+
+import re
+pattern = 'not in text'
+print(re.search(pattern, text)) # None
+pattern = 'phone'
+print(re.search(pattern, text)) # <re.Match object; span=(12, 17), match='phone'>
+match = re.search(pattern, text) # will only get the first match
+print(match.span()) # (12, 17)
+print(match.start()) # 12
+print(match.end()) # 17
+
+text = "phone once, phone twice"
+matches = re.findall('phone', text) # find all patterns in a string
+print(matches) # ['phone', 'phone']
+for match in re.finditer('phone', text): # find each match
+    print(match)
+# returns: 
+# <re.Match object; span=(0, 5), match='phone'>
+# <re.Match object; span=(12, 17), match='phone'>
+
+# character identifiers: 
+# \d    => a digit
+# \w    => a letter, or a digit, or an underscore
+# \s    => a white space
+# \D    => not a digit
+# \W    => not a letter, nor a digit, not an underscore
+# \S    => not a white space
+
+# quantifiers that decorates the one character identifier or char before it:
+# +     => occurs one or more times, e.g.: "Version \w-\w+" => "Version A-b1_1"
+# {3}   => occurs exactly 3 times, e.g.: "\D{3}" => "abc"
+# {2,4} => occurs 2 to 4 times, e.g.: "\d{2,4}" => "123"
+# {3,}  => occurs >=3 times, e.g.: "\w{3,}" => "123_abc"
+# *     => occurs >= 0 times, e.g.: "A*B*C*" => "AAACC"
+# ?     => occurs 0 or 1 times, e.g.: "plurals?" => "plural"
+
+text = 'My phone number is 123-456-7890'
+phone = re.search('123-456-7890', text)
+print(phone) # <re.Match object; span=(19, 31), match='123-456-7890'>
+phone = re.search(r'\d\d\d-\d\d\d-\d\d\d\d', text) # need r before string pattern
+print(phone) # <re.Match object; span=(19, 31), match='123-456-7890'>
+print(phone.group()) # 123-456-7890
+
+phone = re.search(r'\d{3}-\d{3}-\d{4}', text) # need r before string pattern
+print(phone) # <re.Match object; span=(19, 31), match='123-456-7890'>
+print(phone.group()) # 123-456-7890
+
+phone_pattern = re.compile(r'(\d{3})-(\d{3})-(\d{4})') # '()-()-()' groups 3 regex
+results = re.search(phone_pattern, text)
+print(results.group()) # 123-456-7890
+# access each of the 3 groups, idx starts from 1: 
+print(results.group(1)) # 123
+print(results.group(2)) # 456
+print(results.group(3)) # 7890
+
+```
+
 
 ## Timeit
 
-## Regular Expressions
 
 ## Unzipping and Zipping Modules
 
