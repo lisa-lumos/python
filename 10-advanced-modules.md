@@ -218,12 +218,56 @@ print(results.group()) # 123-456-7890
 print(results.group(1)) # 123
 print(results.group(2)) # 456
 print(results.group(3)) # 7890
-
 ```
 
-
 ## Timeit
+Can be used to time your code's performance. 
+```py
+def func_one(n):
+    return [str(num) for num in range(n)]
 
+print(func_one(10)) # ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
+
+def func_two(n):
+    return list(map(str, range(n)))
+
+print(func_two(10)) # ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
+
+# method 1: use time difference. Problem: precision is not good enough for fast code
+import time
+start_time =  time.time()
+result = func_one(1000000)
+end_time = time.time()
+elapsed_time = end_time - start_time
+print(elapsed_time) # 0.06716489791870117 # unit is in seconds
+
+start_time =  time.time()
+result = func_two(1000000)
+end_time = time.time()
+elapsed_time = end_time - start_time
+print(elapsed_time) # 0.06970787048339844 
+
+# method 2: use the timeit module. 
+import timeit
+statement = '''
+func_one(100)
+''' # the statement to test performance, in the form of a string
+setup = '''
+def func_one(n):
+    return [str(num) for num in range(n)]
+''' # the function used in the statement
+avg_time = timeit.timeit(statement, setup, number=1000000)
+print(avg_time) # 5.778604458086193
+statement = '''
+func_two(100)
+''' # the statement to test performance, in the form of a string
+setup = '''
+def func_two(n):
+    return list(map(str, range(n)))
+''' # the function used in the statement
+avg_time = timeit.timeit(statement, setup, number=1000000)
+print(avg_time) # 5.254787957994267
+```
 
 ## Unzipping and Zipping Modules
 

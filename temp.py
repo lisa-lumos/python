@@ -230,33 +230,82 @@
 # print(results.group(2)) # 456
 # print(results.group(3)) # 7890
 
-import re
-print(re.search(r'cat', 'The cat is here')) # <re.Match object; span=(4, 7), match='cat'>
-print(re.search(r'cat|dog', 'The dog is here')) # <re.Match object; span=(4, 7), match='dog'> # the pipe operator, for "or" operation
-print(re.findall(r'at', 'The cat in the hat sat there.')) # ['at', 'at', 'at']
-print(re.findall(r'.at', 'The cat in the hat sat there.')) # ['cat', 'hat', 'sat'] # wildcard operator
-print(re.findall(r'...at', 'The cat in the hat sat there.')) # ['e cat', 'e hat'] # wildcard operator
-print(re.findall(r'^\d', '2 is a number')) # ['2'] # search for the number that starts the string, ^ means starts with
-print(re.findall(r'\d$', '2 is a number, so is 3')) # ['3'] # search for the number that ends the string, $ means ends with
-phrase = 'there are 3 numbers 34 inside 5 this sentence'
-pattern = r'[^\d]+' # exclude single/continuous digits, [] are often used for excludes
-print(re.findall(pattern, phrase)) # ['there are ', ' numbers ', ' inside ', ' this sentence']
+# import re
+# print(re.search(r'cat', 'The cat is here')) # <re.Match object; span=(4, 7), match='cat'>
+# print(re.search(r'cat|dog', 'The dog is here')) # <re.Match object; span=(4, 7), match='dog'> # the pipe operator, for "or" operation
+# print(re.findall(r'at', 'The cat in the hat sat there.')) # ['at', 'at', 'at']
+# print(re.findall(r'.at', 'The cat in the hat sat there.')) # ['cat', 'hat', 'sat'] # wildcard operator
+# print(re.findall(r'...at', 'The cat in the hat sat there.')) # ['e cat', 'e hat'] # wildcard operator
+# print(re.findall(r'^\d', '2 is a number')) # ['2'] # search for the number that starts the string, ^ means starts with
+# print(re.findall(r'\d$', '2 is a number, so is 3')) # ['3'] # search for the number that ends the string, $ means ends with
+# phrase = 'there are 3 numbers 34 inside 5 this sentence'
+# pattern = r'[^\d]+' # exclude single/continuous digits, [] are often used for excludes
+# print(re.findall(pattern, phrase)) # ['there are ', ' numbers ', ' inside ', ' this sentence']
 
-phrase = 'This is a string! But it has punctuation. We need to remove them. '
-print(re.findall(r'[^!.?]+', phrase)) # ['This is a string', ' But it has punctuation', ' We need to remove them', ' ']
-words = re.findall(r'[^!.? ]+', phrase) # ['This', 'is', 'a', 'string', 'But', 'it', 'has', 'punctuation', 'We', 'need', 'to', 'remove', 'them'] # also removes spaces, and return a list
-print(words) 
-print(' '.join(words)) # This is a string But it has punctuation We need to remove them
+# phrase = 'This is a string! But it has punctuation. We need to remove them. '
+# print(re.findall(r'[^!.?]+', phrase)) # ['This is a string', ' But it has punctuation', ' We need to remove them', ' ']
+# words = re.findall(r'[^!.? ]+', phrase) # ['This', 'is', 'a', 'string', 'But', 'it', 'has', 'punctuation', 'We', 'need', 'to', 'remove', 'them'] # also removes spaces, and return a list
+# print(words) 
+# print(' '.join(words)) # This is a string But it has punctuation We need to remove them
 
-text = 'Only find the dash-words in this sentence. But you do not know how long-ish they are. '
-pattern = r'[\w]+'
-print(re.findall(pattern, text)) # ['Only', 'find', 'the', 'dash', 'words', 'in', 'this', 'sentence', 'But', 'you', 'do', 'not', 'know', 'how', 'long', 'ish', 'they', 'are'] # return all alphanumerics. 
-pattern = r'[\w]+-[\w]+' # alphanumerics-alphanumerics
-print(re.findall(pattern, text)) # ['dash-words', 'long-ish']
+# text = 'Only find the dash-words in this sentence. But you do not know how long-ish they are. '
+# pattern = r'[\w]+'
+# print(re.findall(pattern, text)) # ['Only', 'find', 'the', 'dash', 'words', 'in', 'this', 'sentence', 'But', 'you', 'do', 'not', 'know', 'how', 'long', 'ish', 'they', 'are'] # return all alphanumerics. 
+# pattern = r'[\w]+-[\w]+' # alphanumerics-alphanumerics
+# print(re.findall(pattern, text)) # ['dash-words', 'long-ish']
 
-text = 'Hello, would you like some catfish? or catnap? or caterpillar?'
-pattern = r'cat(fish|nap|claw)' # use () for a group of or operations
-print(re.search(pattern, text)) # <re.Match object; span=(27, 34), match='catfish'>
+# text = 'Hello, would you like some catfish? or catnap? or caterpillar?'
+# pattern = r'cat(fish|nap|claw)' # use () for a group of or operations
+# print(re.search(pattern, text)) # <re.Match object; span=(27, 34), match='catfish'>
+
+# def func_one(n):
+#     return [str(num) for num in range(n)]
+
+# print(func_one(10)) # ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
+
+# def func_two(n):
+#     return list(map(str, range(n)))
+
+# print(func_two(10)) # ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
+
+# # method 1: use time difference. Problem: precision is not good enough for fast code
+# import time
+# start_time =  time.time()
+# result = func_one(1000000)
+# end_time = time.time()
+# elapsed_time = end_time - start_time
+# print(elapsed_time) # 0.06716489791870117 # unit is in seconds
+
+# start_time =  time.time()
+# result = func_two(1000000)
+# end_time = time.time()
+# elapsed_time = end_time - start_time
+# print(elapsed_time) # 0.06970787048339844 
+
+# # method 2: use the timeit module. 
+# import timeit
+# statement = '''
+# func_one(100)
+# ''' # the statement to test performance, in the form of a string
+# setup = '''
+# def func_one(n):
+#     return [str(num) for num in range(n)]
+# ''' # the function used in the statement
+# avg_time = timeit.timeit(statement, setup, number=1000000)
+# print(avg_time) # 5.778604458086193
+# statement = '''
+# func_two(100)
+# ''' # the statement to test performance, in the form of a string
+# setup = '''
+# def func_two(n):
+#     return list(map(str, range(n)))
+# ''' # the function used in the statement
+# avg_time = timeit.timeit(statement, setup, number=1000000)
+# print(avg_time) # 5.254787957994267
+
+
+
+
 
 
 
