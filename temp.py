@@ -303,6 +303,37 @@
 # avg_time = timeit.timeit(statement, setup, number=1000000)
 # print(avg_time) # 5.254787957994267
 
+# f = open('file1.txt', 'w+')
+# f.write('one file')
+# f.close()
+
+# f = open('file2.txt', 'w+')
+# f.write('two file')
+# f.close()
+
+# import zipfile # this has to put file into zip one by one
+# comp_file = zipfile.ZipFile('comp_file.zip', 'w') # write items to this zip file
+# comp_file.write('file1.txt', compress_type=zipfile.ZIP_DEFLATED)
+# comp_file.write('file2.txt', compress_type=zipfile.ZIP_DEFLATED)
+# comp_file.close()
+
+# zip_obj = zipfile.ZipFile('comp_file.zip', 'r')
+# zip_obj.extractall('extracted_content') # unzip to this folder
+
+# import shutil # this can do a dir into a zip all at once
+# dir_to_zip = '/mypath/extracted_content'
+# output_filename = 'example'
+# shutil.make_archive(output_filename, 'zip', dir_to_zip) # will zip source dir into example.zip file 
+# shutil.unpack_archive('example.zip', 'folder_to_unzip', 'zip') # unzip to this folder
+
+
+
+
+
+
+
+
+
 
 
 
