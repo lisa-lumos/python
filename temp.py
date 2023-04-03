@@ -419,5 +419,50 @@
 # # 15External links
 
 
+# import requests
+# import bs4
+# res = requests.get("https://en.wikipedia.org/wiki/Deep_Blue_(chess_computer)")
+# soup = bs4.BeautifulSoup(res.text, 'lxml')
+# list_of_img_tags = soup.select('img')
+# # print(list_of_img_tags[3]) # shows an image tag
+# list_of_img_tags = soup.select('.thumbimage')
+# # print(list_of_img_tags)
+# link1_text = list_of_img_tags[0]['src']
+# print(link1_text)
+# img_link = requests.get('https:' + link1_text)
+# print('https:' + link1_text)
+# f = open('image.jpg', 'wb') # write binary for this image
+# f.write(img_link.content)
+# f.close()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
