@@ -491,7 +491,44 @@
 # pdf_writer.write(f_out)
 # f_out.close()
 
+# import smtplib
+# smtp_obj = smtplib.SMTP('smtp.gmail.com', 587)
+# smtp_obj.ehlo() # greets the server, need to be immediately after obj creation
+# smtp_obj.starttls() # initiate TLS encryption
+# import getpass
+# email = getpass.getpass("Email: ") # will hide your input
+# pwd = getpass.getpass("App Password: ") 
+# smtp_obj.login(email, pwd)
+# from_address = email
+# to_address = email
+# subject =  "This is my subject"
+# message = "This is my message"
+# msg = "Subject: " + subject + '\n' + message # construct the email text
+# smtp_obj.sendmail(from_address, to_address, msg)
+# smtp_obj.quit() # close the connection
 
+# import imaplib
+# M = imaplib.IMAP4_SSL('imap.gmail.com')
+# import getpass
+# email = getpass.getpass("Email: ")
+# pwd = getpass.getpass("App Password: ") 
+# M.login(email, pwd)
+# M.list() # shows everything you can check in your email
+# M.select('inbox')
+# my_type, my_ids = M.search(None, 'SUBJECT "This is my subject"')
+# id1 = my_ids[0] # the id of the first email in the search result
+# print(id1)
+# result, email_data = M.fetch(id1, '(RFC822)')
+# print(email_data) # all sorts of info, including email subject and content
+# raw_email = email_data[0][1]
+# raw_email_string = raw_email.decode('utf-8')
+# import email # parses the raw_email_string
+# email_message = email.message_from_string(raw_email_string)
+# for part in email_message.walk():
+#     if part.get_content_type() == 'text/plain':
+#         body = part.get_payload(decode=True)
+#         print(body) # b'This is my message\r\n'
+# M.close()
 
 
 
