@@ -1,3 +1,254 @@
+# print(1+1) # 2
+# print() # 
+
+# print(2 + 1) # 3 # plus
+# print(2 - 1) # 1 # minus
+# print(2 * 2) # 4 # multiply
+# print(2 / 3) # 0.6666666666666666 # divide
+# print(7 % 4 ) # 3 # Modulo
+# print((-7) % 3) # 2
+# print(2 ** 3) # 8 # power
+
+# print(0.1+0.2) # 0.30000000000000004 # approximation with decimal
+# print(round(2.675, 2)) # 2.67 # round the value 2.675 to two decimal places
+
+# from decimal import Decimal
+# print(Decimal(2.675)) # to see the exact value
+# # Decimal('2.67499999999999982236431605997495353221893310546875')
+
+# a = 5
+# print(a) # 5
+# a =  a + a 
+# print(a) # 10
+# print(type(a)) # <class 'int'> # return type of a variable
+# a = 3.2 # example of dynamic typing
+# print(type(a)) # <class 'float'>
+
+# income = 3
+# tax_rate = 0.2
+# tax_amount = income * tax_rate
+# print(tax_amount) # 0.6000000000000001
+
+# print('hello, this is a string') 
+# print("I'm learning python. ") # take advantage of single or double quotes
+# print('hello\nworld') # have a new line in a string
+# # hello
+# # world
+# print('hello\tworld') # hello   world # have a tab in a string
+# print(len('hello round')) # 11 # length of string
+
+# s = "Hello World!"
+# print(s[0]) # H # get a char out of string
+# print(s[-3]) # l # reverse indexing
+# print(s[2:]) # llo World! # get substr starting at idx=2
+# print(s[:2]) # He # get the substr up to but exclusive idx=2
+# print(s[2:5]) # llo # get the substr start at idx=2 and ends at idx=5 (exclusive)
+# print(s[::]) # Hello World! # get the whole string, with step size unspecified
+# print(s[::2]) # HloWrd # get the whole string with step size=2
+# print(s[2:7:2]) # loW # get the substring idx = [2, 7) with step size=2. [start:stop:step size]
+# print(s[::-1]) # !dlroW olleH # reverse the string
+
+# name = 'Sam'
+# # name[0] = 'P' # TypeError due to string is immutable. So if want to change it, will need to create a new string
+# # ---------------------------------------------------------------------------
+# # TypeError                                 Traceback (most recent call last)
+# # /var/folders/bn/yypl5g397pz61ngtbr4xsbrc0000gn/T/ipykernel_78033/1930518064.py in 
+# # ----> 1 name[0] = 'P' # TypeError due to string is immutable
+# #       2 # So if want to change it, will need to create a new string.
+
+# # TypeError: 'str' object does not support item assignment
+# name2 = 'P' + name[1:] # string concatenation
+# print(name2) # Pam
+# name3 = name * 5 # multiplication of strings
+# print(name3) # SamSamSamSamSam
+# print(name.upper()) # SAM # convert to upper case. Returns the new string
+# print("NAME".lower()) # name # convert to lower case
+# print("Hello World!".split()) # ['Hello', 'World!'] # split a string by space, return a list
+# print("Hello World!".split("o")) # ['Hell', ' W', 'rld!'] # split by specified string
+# print("Hello World!".split("o ")) # ['Hell', 'World!'] # split by specified string
+
+# print('This is a string {}'.format('INSERTED')) # This is a string INSERTED # String interpolation (insert a var into a string)
+# print('The {} {} {}'.format('round1', 'round2', 'round3')) # The round1 round2 round3
+# print('The {2} {1} {0}'.format('round1', 'round2', 'round3')) # The round3 round2 round1 # reorder
+# print('The {0} {0} {0}'.format('round1', 'round2', 'round3')) # The round1 round1 round1 # repeat
+# print('The {r1} {r2} {r3}'.format(r1='round1', r2='round2', r3='round3')) # The round1 round2 round3 # assign keywords
+
+# result = 100/777
+# print(result) # 0.1287001287001287
+# print("The result was {}".format(result)) # The result was 0.1287001287001287
+# print("The result was {r}".format(r=result)) # The result was 0.1287001287001287
+# print("The result was {r:1.3f}".format(r=result)) # The result was 0.129 # {value[:width][.precision]f}
+# print("The result was {r:10.3f}".format(r=result)) # The result was      0.129
+# print("The result was {r:0.3f}".format(r=result)) # The result was 0.129
+# print("The result was {r:2.5f}".format(r=result)) # The result was 0.12870
+
+# name = 'Jose'
+# print(f'Hello, his name is {name}') # introduced in Python 3.6
+# name = "Sam"
+# age = 3
+# print(f"{name}'s age is {age}") # Sam's age is 3
+
+# my_list = [1, 2, 3]
+# my_list = ["string", 100, 32.2] # can combine datatypes in list
+# print(len(my_list)) # 3 # return length of list
+
+# my_list = ['one', 'two', 'three']
+# print(my_list[0]) # 'one'
+# print(my_list[1:]) # ['two', 'three'] # slicing of list works like slicing of string 
+
+# another_list = ['four', 3.5]
+# new_list = my_list + another_list
+# print(new_list) # ['one', 'two', 'three', 'four', 3.5]
+
+# new_list[0] = 100 # you can mutate a list, unlike a string
+# print(new_list) # [100, 'two', 'three', 'four', 3.5]
+# new_list.append("six") # append a new element to end of list
+# print(new_list) # [100, 'two', 'three', 'four', 3.5, 'six']
+# new_list.pop() # remove an elem from the end of list
+# print(new_list) # [100, 'two', 'three', 'four', 3.5]
+# print(new_list.pop()) # 3.5 # pop() returns the val got popped out
+# print(new_list.pop(0)) # 100 # remove an elem of specified index
+# print(new_list.pop(-2)) # three # reverse index works for lists too
+
+# new_list = ['a', 'e', 'x', 'b', 'c']
+# num_list = [4, 1, 8, 3]
+# new_list.sort() # sort the list in-place, so return nothing
+# print(new_list) # ['a', 'b', 'c', 'e', 'x']
+# print(sorted(new_list)) # ['a', 'b', 'c', 'e', 'x'] # this returns the sorted list
+# num_list.sort()
+# print(num_list) # [1, 3, 4, 8]
+# num_list.reverse()
+# print(num_list) # [8, 4, 3, 1]
+
+# my_dict = {'key1':'value1', 'key2':'value2'} # initialize a dict
+# print(my_dict) # {'key1': 'value1', 'key2': 'value2'}
+# print(my_dict['key2']) # value2 # retrieve a value based on its key
+
+# prices_lookup = {'apple':2.99, 'oranges':1.99, 'milk':5.80}
+# print(prices_lookup['apple']) # 2.99
+
+# prices_lookup = {'apple':2.99, 100:'test', 'milk':5.80} # no restriction on data types
+# print(prices_lookup[100]) # test
+
+# d = {'k1':123, 'k2':[0, 1, 2], 'k3':{'nestedKey':20}} # no restriction on data types, even nested dict or lists
+# print(d['k3']['nestedKey']) # 20
+# print(d['k2'][1]) # 1
+# d['k4'] = 100 # add key-value pair to dictionary
+# print(d) # {'k1': 123, 'k2': [0, 1, 2], 'k3': {'nestedKey': 20}, 'k4': 100}
+# d['k2'] = 'Hi' # update value of a key in a dict
+# print(d) # {'k1': 123, 'k2': 'Hi', 'k3': {'nestedKey': 20}, 'k4': 100}
+# print(d.keys()) # dict_keys(['k1', 'k2', 'k3', 'k4']) # show all keys of the dict
+# print(d.values()) # dict_values([123, 'Hi', {'nestedKey': 20}, 100]) # show all values of the dict
+# print(d.items()) # dict_items([('k1', 123), ('k2', 'Hi'), ('k3', {'nestedKey': 20}), ('k4', 100)]) # show all pairs in the form of tuples
+
+# t = (1, 2, 3)
+# mylist = [1, 2, 3]
+# print(type(t)) # <class 'tuple'>
+# print(type(mylist)) # <class 'list'>
+# print(len(t)) # 3 # return length of tuple
+
+# t = ('One', 2, [1, 2, 3]) # no restriction to data types
+# print(t[1]) # 2 # index a tuple
+# print(t[-1]) # [1, 2, 3] # can also use reverse index
+
+# t = ('a', 'a', 'b', 'z')
+# print(t.count('a')) # 2 # return how many times 'a' exists in the tuple
+# t.index('a') # 2 # return the index where 'a' appears for the first time in tuple
+# # t.index('hi') # will return error the value we look for does not exist
+
+# mylist[0] = 'New'
+# print(mylist) # ['New', 2, 3]
+# # t[0] = 'New' # expect an error, because of immutability
+
+# myset = set() # initialize a set
+# myset.add(1) # add an element to this set
+# print(myset) # {1}
+# myset.add('Hi')
+# print(myset) # {1, 'Hi'}
+# myset.add(1) # re-adding existing elem will not cause err, will not dup either. 
+
+# mylist = [5, 'Hello', 1, 1, 1, 1, 1, 2, 2, 3, 4, 4, 4]
+# myset = set(mylist) # cast a list to a set, could de-dup
+# print(myset) # {1, 2, 3, 4, 5, 'Hello'}
+
+# print(True) # True
+# # print(true) # lowercase is not accepted
+# # Traceback (most recent call last):
+# #   File "/Users/lisa/Desktop/python/temp.py", line 175, in <module>
+# #     print(true)
+# # NameError: name 'true' is not defined
+# print(type(False)) # <class 'bool'>
+# print(1 > 2) # False # comparison operators returns a boolean
+# print(1 == 1) # True
+# b = None
+# print(b) # None
+
+# myfile = open('myfile.txt') # if file not exist, will get error
+# myfile.read() # return a string of everything in the text file
+# myfile.read() # return nothing because cursor is at the end of the file
+# myfile.seek(0) # reset the cursor
+# myfile.read() # return a string of everything in the text file
+# myfile.seek(0)
+# myfile.readlines() # return a list with each line as a string
+# myfile.close() # close the file
+
+# # best practice, so you don't need to close this file by yourself
+# with open('myfile.txt') as f:
+#     contents = f.read()
+# print(contents) # a string of everything in the text file
+
+# with open('myfile.txt', mode = 'r') as f:
+#     contents = f.read()
+# # open function has different modes, default is r (read only)
+# # could also be: 
+# # w (write only, overwrite existing files or create new), 
+# # a (append only), 
+# # r+ (read and write), 
+# # w+ (write and read, overwrites existing file or create new)
+
+# with open('myfile.txt', mode = 'a') as f:
+#     f.write('this is the 4th line') # add a new line
+
+# with open('myfile.txt', mode = 'r') as f:
+#     print(f.read())
+
+# with open('newfile.txt', mode = 'w') as f:
+#     f.write("This is a new file\nLine2") # create a new file and write to it
+
+# with open('newfile.txt', mode = 'r') as f:
+#     print(f.read())
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 # def create_cubes_v1(n): # generates the list in memory as a whole
 #     result = []
 #     for x in range(n):
