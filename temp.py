@@ -467,15 +467,422 @@
 # mylist = [x*y for x in [2, 4, 6] for y in [1, 10, 100]]
 # print(mylist) # [2, 20, 200, 4, 40, 400, 6, 60, 600]
 
+# def say_hello():
+#     print("Hello")
+#     print("Round! ")
+# say_hello()
 
+# def say_hello(name):
+#     print(f"Hello {name}")
+# say_hello("Lisa")
 
+# def say_hello(name='Default name'): # provide a default val for argument
+#     print(f"Hello {name}")
+# say_hello()
 
+# def add_num(num1, num2): # a function that returns something
+#     return num1 + num2
+# my_sum = add_num(1, 2)
+# print(my_sum)
+# add_num('a', 'b') # ab # when inputs are not numbers # Python is dynamically typed, so if create a function that other people use, better check the datatype first
 
+# def even_check(number): # check whether a number is even
+#     return number % 2 == 0
+# print(even_check(4)) # True
+# print(even_check(5)) # False
 
+# def even_check_list(num_list): # check whether list has a num that is even
+#     for num in num_list:
+#         if num % 2 == 0:
+#             return True
+#     return False
+# print(even_check_list([1, 3, 5])) # False
 
+# def return_even_vals(num_list): # return vals in a list that is even
+#     result = []
+#     for num in num_list:
+#         if num % 2 == 0:
+#             result.append(num)
+#     return result
+# print(return_even_vals([1, 2, 3, 5, 7, 8])) # [2, 8]
 
+# stock_prices = [('APPL', 200), ('GOOG', 300), ('MSFT', 100)]
+# for ticker, price in stock_prices: # use tuple unpacking
+#     print(ticker)
+# # APPL
+# # GOOG
+# # MSFT
+# def price_check(stock_prices_list): # return the tuple with max price
+#     cur_max = 0
+#     max_ticker = ''
+#     for ticker, price in stock_prices_list:
+#         if price > cur_max:
+#             cur_max = price
+#             max_ticker = ticker
+#     return (max_ticker, cur_max)
+# print(price_check(stock_prices)) # ('GOOG', 300)
+# ticker_name, price = price_check(stock_prices) # get result using tuple unpacking, could get error if num of items in tuple not match the num of vars on the left hand side
 
+# my_list = [1, 2, 3, 4, 5, 6, 7]
+# from random import shuffle
+# shuffle(my_list) # shuffle the list in-place, so returns nothing
+# def shuffle_list(input_list): # a function that returns shuffled result
+#     shuffle(input_list)
+#     return input_list
+# print(shuffle_list(my_list)) # [4, 5, 2, 1, 6, 7, 3]
 
+# # in below function, a and b are positional arguments
+# def myfunc(a, b): # return 5% of (a+b)
+#     return sum((a, b)) * 0.05
+# print(myfunc(40, 60)) # 5.0
+
+# # *args allows to take multiple arguments, and internally convert into a tuple
+# def myfunc(*args):
+#     return sum(args) * 0.05
+# print(myfunc(40, 60, 100)) # 10.0
+
+# # it is the * that matters, you can use other names, 
+# # but it is best practice to use *args for readability
+# def myfunc(*vals):
+#     return sum(vals) * 0.05
+
+# # **kwargs allows to take a key-val pairs, and internally convert to a dictionary
+# def myfunc(**kwargs):
+#     if 'fruit' in kwargs:
+#         print(f"My fruit is {kwargs['fruit']}")
+#     else: 
+#         print('no fruit')
+# print(myfunc(fruit='apple')) # My fruit is apple
+# print(myfunc(fruit='apple', veggie='cabbage')) # # My fruit is apple
+
+# def myfunc(*args, **kwargs): # you can use both of them in one function
+#     print(f"I would like {args[0]} {kwargs['food']}. ")
+# print(myfunc(1, 2, 3, food='sandwich', fruit='orange')) # I would like 1 sandwich. # note that args should come ahead of kwargs, because location of both of them is defined
+
+# def square(num):
+#     return num**2
+# my_nums = [1, 2, 3, 4, 5]
+# for item in map(square, my_nums): # apply the func to each elem in the array
+#     print(item)
+# # 1
+# # 4
+# # 9
+# # 16
+# # 25
+# print(list(map(square, my_nums))) # [1, 4, 9, 16, 25] # return the result as a list
+
+# def check_even(num):
+#     return num%2 == 0
+# my_nums = [1, 2, 3, 4, 5, 6]
+# print(list(filter(check_even, my_nums))) # [2, 4, 6] # filter takes a func that returns true or false
+
+# # lambda expression (anonymous function)
+# print(lambda num: num**2) # <function __main__.<lambda>(num)>
+# list(map(lambda num:num**2, my_nums)) # [1, 4, 9, 16, 25, 36]
+# list(filter(lambda num: num%2 == 0, my_nums)) # [2, 4, 6]
+
+# name = 'a global string' # global var
+# def greet():
+#     name = "Sammy"  # enclosing function local
+#     def hello(): 
+#         name = 'Lisa' # local var
+#         print(f"hello {name}")
+#     hello()
+# greet() # hello Lisa
+
+# name = 'a global string' # global var
+# def greet():
+#     name = "Sammy"  # enclosing function local
+#     def hello(): 
+#         print(f"hello {name}")
+#     hello()
+# greet() # hello Sammy
+
+# name = 'a global string' # global var
+# def greet():
+#     def hello():
+#         print(f"hello {name}")
+#     hello()
+# greet() # hello a global string
+
+# x = 50
+# def func():
+#     global x # declare x as global, so you can reach out to global namespace
+#     print(f'val of x is {x}')
+#     x = 200
+#     print(f'val of x is updated globally to {x}')
+# func()
+# # val of x is 50
+# # val of x is updated globally to 200
+# print(f'val of x is finally {x}')
+# # val of x is finally 200
+
+# # To avoid accidentally overriding global keyword in a large script, 
+# # recommend to avoid using global keyword, 
+# # and write the function to be like x = func(x) to update x. 
+
+# class Sample():
+#     pass
+# my_sample = Sample() # create an instance of this class
+# print(type(my_sample)) # <class '__main__.Sample'> # return the type of the instance
+
+# class Dog():
+#     def __init__(self, breed):
+#         self.breed = breed # initialize an attribute for this class
+# # my_dog = Dog() # wil return error if do not pass the param breed
+# my_dog = Dog(breed='Lab') # create an instance of this class
+# print(type(my_dog)) # <class '__main__.Dog'> # return the type of this class
+# print(my_dog.breed) # Lab # return the breed attribute of the instance
+
+# class Dog():
+#     def __init__(self, breed, name, spots): # more attributes
+#         self.breed = breed # initialize an attribute for this class
+#         self.name = name
+#         self.spots = spots
+# my_dog = Dog(breed='lab', name='sammy', spots=False)
+# print(my_dog.spots) # False
+
+# class Dog():
+#     animal_type = 'mammal' # class object attribute, same for all instances of this class
+#     def __init__(self, breed, name, spots): # more attributes
+#         self.breed = breed # initialize an attribute for this class
+#         self.name = name
+#         self.spots = spots
+# my_dog = Dog(breed='lab', name='sammy', spots=False)
+# print(my_dog.animal_type) # mammal
+
+# class Dog():
+#     animal_type = 'mammal' # class object attribute, same for all instances of this class
+#     def __init__(self, breed, name, spots): # more attributes
+#         self.breed = breed # initialize an attribute for this class
+#         self.name = name
+#         self.spots = spots
+#     def bark(self): # a method of this class
+#         print("Woof!")
+# my_dog = Dog(breed='lab', name='sammy', spots=False)
+# my_dog.bark() # Woof!
+
+# class Dog():
+#     animal_type = 'mammal' # class object attribute, same for all instances of this class
+#     def __init__(self, breed, name, spots): # more attributes
+#         self.breed = breed # initialize an attribute for this class
+#         self.name = name
+#         self.spots = spots
+#     def bark(self): # a method of this class, uses the class attribute
+#         print(f"Woof! My name is {self.name}")
+# my_dog = Dog(breed='lab', name='sammy', spots=False)
+# my_dog.bark() # Woof! My name is sammy
+
+# class Dog():
+#     animal_type = 'mammal' # class object attribute, same for all instances of this class
+#     def __init__(self, breed, name, spots): # more attributes
+#         self.breed = breed # initialize an attribute for this class
+#         self.name = name
+#         self.spots = spots
+#     def bark(self, my_number): # a method of this class, takes a variable
+#         print(f"Woof! My name is {self.name}, and my number is {my_number}")
+# my_dog = Dog(breed='lab', name='sammy', spots=False)
+# my_dog.bark(3) # Woof! My name is sammy, and my number is 3
+
+# class Circle():
+#     PI = 3.14
+#     def __init__(self, radius=1): # radius has a default value
+#         self.radius = radius
+#     def get_circumference(self):
+#         return self.radius * self.PI * 2
+# my_circle = Circle() # use default radius value
+# my_circle.get_circumference() # 6.28
+# my_circle = Circle(2) # use customized value
+# my_circle.get_circumference() # 12.56
+
+# class Circle():
+#     PI = 3.14
+#     def __init__(self, radius=1): # radius has a default value
+#         self.radius = radius
+#         self.area = self.PI * radius * radius
+#     def get_circumference(self):
+#         return self.radius * self.PI * 2
+# my_circle = Circle(2) # use customized value
+# my_circle.area # 12.56
+
+# class Circle():
+#     PI = 3.14  # can use Circle instead of self to refer class attribute
+#     def __init__(self, radius=1): # radius has a default value
+#         self.radius = radius
+#         self.area = Circle.PI * radius * radius
+#     def get_circumference(self):
+#         return self.radius * Circle.PI * 2
+
+# class Animal():
+#     def __init__(self):
+#         print("Animal created. ")
+#     def who_am_i(self):
+#         print("I am an animal. ")
+#     def eat(self):
+#         print("I am eating. ")
+# my_animal = Animal() # Animal created. 
+# my_animal.eat() # I am eating. 
+# class Dog(Animal): # derive the Animal class
+#     def __init__(self):
+#         Animal.__init__(self)
+#         print("Dog created. ")
+#     def who_am_i(self):
+#         print("I am a dog!")
+#     def bark(self):
+#         print("Woof! ")
+# mydog = Dog()
+# # Animal created. 
+# # Dog created. 
+# mydog.eat() # this dog instance can reuse the animal methods via inheritance
+# # I am eating. 
+# mydog.who_am_i() # it can overwrite the animal methods
+# # I am a dog!
+# mydog.bark() # it can add new methods
+# # Woof! 
+
+# class Dog():
+#     def __init__(self, name):
+#         self.name = name
+#     def speak(self):
+#         return self.name + " says woof! "
+# class Cat():
+#     def __init__(self, name):
+#         self.name = name
+#     def speak(self):
+#         return self.name + " says meow! "
+# niko = Dog("Niko")
+# felix = Cat("felix")
+# for pet in [niko, felix]: # example of polymorphism
+#     print(pet.speak())
+# # Niko says woof! 
+# # felix says meow! 
+# def pet_speak(pet):
+#     print(pet.speak())
+# pet_speak(niko)
+# pet_speak(felix)
+# # Niko says woof! 
+# # felix says meow!
+
+# class Animal(): # abstract class
+#     def __init__(self, name):
+#         self.name = name
+#     def speak(self):
+#         raise NotImplementedError("this is an abstract method")
+# my_animal =  Animal('fred')
+# # my_animal.speak() # NotImplementedError 
+# class Dog(Animal):
+#     def speak(self):
+#         return self.name + ' says woof! '
+# fido = Dog('Fido')
+# fido.speak() # 'Fido says woof! '
+
+# class Book():
+#     def __init__(self, title, author, pages):
+#         self.title = title
+#         self.author = author
+#         self.pages = pages
+#     def __str__(self): # return the string representation of the object
+#         return f"{self.title} by {self.author}"
+#     def __len__(self):
+#         return self.pages
+# mybook = Book('mytitle', 'myauthor', 100)
+# print(mybook) # mytitle by myauthor # this calls the __str__(self) 
+# print(str(mybook)) # mytitle by myauthor # this also calls __str__(self)
+# print(len(mybook)) # 100 # this calls __len__(self)
+# del mybook # delete the instance of this Book object, works without __del__() defined
+
+# class Book():
+#     def __init__(self, title, author, pages):
+#         self.title = title
+#         self.author = author
+#         self.pages = pages
+#     def __str__(self): # return the string representation of the object
+#         return f"{self.title} by {self.author}"
+#     def __len__(self):
+#         return self.pages
+#     def __del__(self):
+#         print("A book object has been deleted. ")
+# mybook = Book('mytitle', 'myauthor', 100)
+# del mybook # A book object has been deleted. # now also calls __del__() , and delete the instance
+
+# def add(n1, n2):
+#     print (n1 + n2)
+# num1 = 1
+# num2 = '2'
+# try: 
+#     add(num1, num2)
+# except:
+#     print('Error adding two numbers!')
+# # Error adding two numbers!
+# try: 
+#     add(num1, num2)
+# except: # runs if try block has error
+#     print('Error adding two numbers!')
+# else: # runs if try block had no issue
+#     print("Add went well!")
+# finally:
+#     print("I run anyway!")
+# # Error adding two numbers!
+# # I run anyway!
+
+# try: 
+#     f = open('testfile.txt', 'w') # write mode
+#     f.write("Write a test line")
+# except TypeError:
+#     print("There was a type error! ")
+# except OSError:
+#     print("You have an OS Error! ")
+# finally:
+#     print('I always run!')
+# # I always run!
+
+# try: 
+#     f = open('testfile.txt', 'r') # read mode
+#     f.write("Write a test line")
+# except TypeError:
+#     print("There was a type error! ")
+# except OSError:
+#     print("You have an OS Error! ")
+# except: # catch anything else
+#     print("All other exceptions! ")
+# finally:
+#     print('I always run!')
+# # You have an OS Error! 
+# # I always run!
+
+# def ask_for_int():
+#     try: 
+#         result = int(input('Please provide a number: '))
+#     except:
+#         print("That is not a number. ")
+#     finally: 
+#         print("End of the block. ")
+# ask_for_int() # provide 20 as input
+# # End of the block.
+# ask_for_int() # provide a as input
+# # That is not a number. 
+# # End of the block.  
+
+# def ask_for_int():
+#     while True:
+#         try: 
+#             result = int(input('Please provide a number: '))
+#         except:
+#             print("That is not a number. ")
+#             continue
+#         else: 
+#             print('Yes, thank you')
+#             break
+#         finally:
+#             print('End of one loop')
+# ask_for_int() # provide 20
+# # Yes, thank you
+# # End of one loop
+# ask_for_int() # provide a, then 2
+# # That is not a number. 
+# # End of one loop
+# # Yes, thank you
+# # End of one loop
 
 
 

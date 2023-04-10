@@ -6,6 +6,87 @@ Someone may use your code in an unexpected way. Error handling can plan for poss
 - `except`: the block of code that will be run if the try block has error
 - `finally`: the block of code that will always be run, regardless of error
 
+```py
+def add(n1, n2):
+    print (n1 + n2)
+num1 = 1
+num2 = '2'
+try: 
+    add(num1, num2)
+except:
+    print('Error adding two numbers!')
+# Error adding two numbers!
+try: 
+    add(num1, num2)
+except: # runs if try block has error
+    print('Error adding two numbers!')
+else: # runs if try block had no issue
+    print("Add went well!")
+finally:
+    print("I run anyway!")
+# Error adding two numbers!
+# I run anyway!
+
+try: 
+    f = open('testfile.txt', 'w') # write mode
+    f.write("Write a test line")
+except TypeError:
+    print("There was a type error! ")
+except OSError:
+    print("You have an OS Error! ")
+finally:
+    print('I always run!')
+# I always run!
+
+try: 
+    f = open('testfile.txt', 'r') # read mode
+    f.write("Write a test line")
+except TypeError:
+    print("There was a type error! ")
+except OSError:
+    print("You have an OS Error! ")
+except: # catch anything else
+    print("All other exceptions! ")
+finally:
+    print('I always run!')
+# You have an OS Error! 
+# I always run!
+
+def ask_for_int():
+    try: 
+        result = int(input('Please provide a number: '))
+    except:
+        print("That is not a number. ")
+    finally: 
+        print("End of the block. ")
+ask_for_int() # provide 20 as input
+# End of the block.
+ask_for_int() # provide a as input
+# That is not a number. 
+# End of the block.  
+
+def ask_for_int():
+    while True:
+        try: 
+            result = int(input('Please provide a number: '))
+        except:
+            print("That is not a number. ")
+            continue
+        else: 
+            print('Yes, thank you')
+            break
+        finally:
+            print('End of one loop')
+ask_for_int() # provide 20
+# Yes, thank you
+# End of one loop
+ask_for_int() # provide a, then 2
+# That is not a number. 
+# End of one loop
+# Yes, thank you
+# End of one loop
+```
+
 ## Unit testing
 As you begin to expand to larger multi-file projects, it becomes important to have tests in place. So as you make changes or update your code, you can run your test files to make sure previous code still runs as expected. 
 
@@ -43,7 +124,6 @@ Now create a python file simple2.py, with better var names etc:
 A very simple script. 
 '''
 
-
 def myfunc():
     '''
     A simple function
@@ -52,7 +132,6 @@ def myfunc():
     second = 2
     print(first)
     print(second)
-
 
 myfunc()
 ```
