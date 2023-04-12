@@ -10,6 +10,54 @@ Streamlit is a Python library that allows the creation of interactive, data-driv
 
 <img src="images/01-demo.png">
 
+## The "Hello World" app
+Create a file "streamlit_app.py":
+```py
+# set 'stenv' as interpreter for the IDE
+import streamlit as st
+st.write('Hello world!')
+```
+
+To run the app, in the terminal:
+```console
+(base) lisa@mac16 python % conda info --envs
+# conda environments:
+#
+base                  *  /Users/lisa/miniconda3
+                         /Users/lisa/opt/anaconda3/envs/stenv
+
+(base) lisa@mac16 python % conda activate /Users/lisa/opt/anaconda3/envs/stenv
+
+(stenv) lisa@mac16 python % streamlit run 02-streamlit/streamlit_app.py 
+
+  You can now view your Streamlit app in your browser.
+
+  Local URL: http://localhost:8501
+  Network URL: http://192.168.0.194:8501
+
+  For better performance, install the Watchdog module:
+
+  $ xcode-select --install
+  $ pip install watchdog
+           
+```
+And the app opens in the browser:
+<img src="images/02-hello-world.png">
+
+## Streamlit widgets
+```py
+st.header('st.button') # header text
+if st.button('click me, I am a button'): # button has text str; clause returns true if button is clicked
+    st.write('The button was clicked') # write this text to the screen
+else:
+    st.write('The button has not been clicked')
+```
+
+Run the app, it displays:
+<img src="images/03-button1.png">
+
+If we click the button, it then displays:
+<img src="images/03-button2.png">
 
 
 
@@ -20,26 +68,14 @@ Streamlit is a Python library that allows the creation of interactive, data-driv
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+## my notes
+- Clicking a button will not cause the page to reload, instead, its status is set to "got clicked"
+- Selecting a checkbox will cause the app to reload. So if use a checkbox inside a button, the button's state will be lost from refreshing the page when the checkbox got selected (reset to not-got-clicked). So if you use a button, make sure it is the last nested button you use. 
 
 
 ## References
 - `https://30days.streamlit.app/`
-
+- `https://docs.streamlit.io/library/api-reference/widgets/st.button`
 
 
 
