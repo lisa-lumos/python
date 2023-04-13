@@ -4,7 +4,7 @@ Streamlit is a Python library that allows the creation of interactive, data-driv
 ## Setup
 1. install Miniconda from `https://docs.conda.io/en/latest/miniconda.html`
 2. create a new environment with Python 3.9 with `conda create -n stenv python=3.9`
-3. activate the conda env: `conda activate stenv`
+3. activate the conda env: `conda activate stenv`. A conda environment is a folder or directory that contains a specific collection of conda packages and their dependencies. This allows them to be maintained and run separately without interference from each other.
 4. install the Streamlit library: `pip install streamlit`
 5. launch the Streamlit demo app: `streamlit hello`
 
@@ -59,8 +59,12 @@ Run the app, it displays:
 If we click the button, it then displays:
 <img src="images/03-button2.png">
 
+## Data Science portfolio project
+This dashboard analyzes Ken Jee's YouTube channel. It shows the KPIs that he would like to see as a YouTuber. It contains these pages:
+- Aggregate metrics - overall channel health; performance in the last 6 mo vs the baseline; how each individual video performed against the baseline 
+- Individual video analysis - num of views vs subscription in diff countries; views of this video in first 30 days compared to average, top 20%, top 80% videos 
 
-
+See details in the folder `youtube-data-analysis`
 
 
 
@@ -76,7 +80,7 @@ If we click the button, it then displays:
 ## References
 - `https://30days.streamlit.app/`
 - `https://docs.streamlit.io/library/api-reference/widgets/st.button`
-
+- `https://www.youtube.com/watch?v=Yk-unX4KnV4`
 
 
 
