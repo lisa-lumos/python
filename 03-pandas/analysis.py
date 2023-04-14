@@ -89,6 +89,90 @@ import pandas as pd # pip install pandas
 # # dtypes: float64(2), int64(5), object(5)
 # # memory usage: 83.7+ KB
 
+import pandas as pd
+titanic = pd.read_csv("data/titanic.csv")
+print(type(titanic["Age"])) # <class 'pandas.core.series.Series'> # Each col in a DataFrame is a Series
+print(titanic["Age"].shape) # (891,) # A Series is 1d, so only num of rows is returned
+
+age_sex = titanic[["Age", "Sex"]] # select multiple columns with []
+print(age_sex.head(5))
+#     Age     Sex
+# 0  22.0    male
+# 1  38.0  female
+# 2  26.0  female
+# 3  35.0  female
+# 4  35.0    male
+print(type(titanic[["Age", "Sex"]])) # <class 'pandas.core.frame.DataFrame'>
+print(titanic[["Age", "Sex"]].shape) # (891, 2)
+
+above_35 = titanic[titanic["Age"] > 35] # select rows with age > 35
+print(above_35.head(5))
+#     PassengerId  Survived  Pclass                                               Name     Sex  ...  Parch    Ticket     Fare Cabin  Embarked
+# 1             2         1       1  Cumings, Mrs. John Bradley (Florence Briggs Th...  female  ...      0  PC 17599  71.2833   C85         C
+# 6             7         0       1                            McCarthy, Mr. Timothy J    male  ...      0     17463  51.8625   E46         S
+# 11           12         1       1                           Bonnell, Miss. Elizabeth  female  ...      0    113783  26.5500  C103         S
+# 13           14         0       3                        Andersson, Mr. Anders Johan    male  ...      5    347082  31.2750   NaN         S
+# 15           16         1       2                   Hewlett, Mrs. (Mary D Kingcome)   female  ...      0    248706  16.0000   NaN         S
+
+# [5 rows x 12 columns]
+print(above_35.shape) # (217, 12)
+
+class_23 = titanic[titanic["Pclass"].isin([2, 3])] # select rows with Pclass with vals 2 & 3
+print(class_23.head(5))
+#    PassengerId  Survived  Pclass                            Name     Sex   Age  SibSp  Parch            Ticket     Fare Cabin Embarked
+# 0            1         0       3         Braund, Mr. Owen Harris    male  22.0      1      0         A/5 21171   7.2500   NaN        S
+# 2            3         1       3          Heikkinen, Miss. Laina  female  26.0      0      0  STON/O2. 3101282   7.9250   NaN        S
+# 4            5         0       3        Allen, Mr. William Henry    male  35.0      0      0            373450   8.0500   NaN        S
+# 5            6         0       3                Moran, Mr. James    male   NaN      0      0            330877   8.4583   NaN        Q
+# 7            8         0       3  Palsson, Master. Gosta Leonard    male   2.0      3      1            349909  21.0750   NaN        S
+class_23 = titanic[(titanic["Pclass"] == 2) | (titanic["Pclass"] == 3)] # same select using the or operator "|" (note: cannot user "or" directly)
+
+age_no_na = titanic[titanic["Age"].notna()] # select rows where age is not null
+print(age_no_na.head(3))
+#    PassengerId  Survived  Pclass                                               Name  ...            Ticket     Fare  Cabin  Embarked
+# 0            1         0       3                            Braund, Mr. Owen Harris  ...         A/5 21171   7.2500    NaN         S
+# 1            2         1       1  Cumings, Mrs. John Bradley (Florence Briggs Th...  ...          PC 17599  71.2833    C85         C
+# 2            3         1       3                             Heikkinen, Miss. Laina  ...  STON/O2. 3101282   7.9250    NaN         S
+# 
+# [3 rows x 12 columns]
+
+adult_names = titanic.loc[titanic["Age"] > 35, "Name"] # select name col with age col val > 35, note the loc operator here
+print(adult_names.head(3))
+# 1     Cumings, Mrs. John Bradley (Florence Briggs Th...
+# 6                               McCarthy, Mr. Timothy J
+# 11                             Bonnell, Miss. Elizabeth
+# Name: Name, dtype: object
+print(type(adult_names)) # <class 'pandas.core.series.Series'>
+
+print(titanic.iloc[9:13, 2:5]) # select rows 10 to 13 and cols 3 to 5, note the iloc operator here
+#     Pclass                                 Name     Sex
+# 9        2  Nasser, Mrs. Nicholas (Adele Achem)  female
+# 10       3      Sandstrom, Miss. Marguerite Rut  female
+# 11       1             Bonnell, Miss. Elizabeth  female
+# 12       3       Saundercock, Mr. William Henry    male
+
+titanic.iloc[0:3, 3] = "anonymous" # assign new values to first 3 row of col #3 (which is name col)
+print(titanic.head(5))
+#    PassengerId  Survived  Pclass                                          Name     Sex  ...  Parch            Ticket     Fare Cabin  Embarked
+# 0            1         0       3                                     anonymous    male  ...      0         A/5 21171   7.2500   NaN         S
+# 1            2         1       1                                     anonymous  female  ...      0          PC 17599  71.2833   C85         C
+# 2            3         1       3                                     anonymous  female  ...      0  STON/O2. 3101282   7.9250   NaN         S
+# 3            4         1       1  Futrelle, Mrs. Jacques Heath (Lily May Peel)  female  ...      0            113803  53.1000  C123         S
+# 4            5         0       3                      Allen, Mr. William Henry    male  ...      0            373450   8.0500   NaN         S
+
+# [5 rows x 12 columns]
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
