@@ -28,7 +28,9 @@ base                  *  /Users/lisa/miniconda3
 
 (base) lisa@mac16 python % conda activate /Users/lisa/opt/anaconda3/envs/stenv
 
-(stenv) lisa@mac16 python % streamlit run 02-streamlit/streamlit_app.py 
+(stenv) lisa@mac16 python % cd 02-streamlit  # cd to the folder that has the .py file
+
+(stenv) lisa@mac16 02-streamlit % streamlit run streamlit_app.py  
 
   You can now view your Streamlit app in your browser.
 
@@ -44,7 +46,7 @@ base                  *  /Users/lisa/miniconda3
 And the app opens in the browser:
 <img src="images/02-hello-world.png">
 
-## Streamlit widgets
+## Streamlit button
 ```py
 st.header('st.button') # header text
 if st.button('click me, I am a button'): # button has text str; clause returns true if button is clicked
@@ -65,6 +67,81 @@ This dashboard analyzes Ken Jee's YouTube channel. It shows the KPIs that he wou
 - Individual video analysis - num of views vs subscription in diff countries; views of this video in first 30 days compared to average, top 20%, top 80% videos 
 
 See details in the folder `youtube-data-analysis`
+
+## st.write()
+st.write allows add the following to the Streamlit app: 
+- Prints strings, works like st.markdown()
+- Displays a Python dict
+- Displays pandas DataFrame as a table
+- Plots/graphs/figures from matplotlib, plotly, altair, graphviz, bokeh
+- ...
+
+```py
+import numpy as np
+import altair as alt
+import pandas as pd
+import streamlit as st
+
+st.header('st.write()')
+st.write('Hello, *World!* :sunglasses:') # can display text using markdown format
+st.write(1234) # display a number
+df = pd.DataFrame({
+     'first column': [1, 2, 3, 4],
+     'second column': [10, 20, 30, 40]
+     })
+st.write(df) # display a dataframe as table
+df2 = pd.DataFrame(
+     np.random.randn(200, 3),
+     columns=['a', 'b', 'c'])
+c = alt.Chart(df2).mark_circle().encode(
+     x='a', y='b', size='c', color='c', tooltip=['a', 'b', 'c'])
+st.write(c) # display a chart plot
+```
+
+Run the app, it displays:
+<img src="images/04-write.png">
+
+## Deploy the app to Streamlit Community Cloud
+Register at `https://share.streamlit.io/` and link GibHub account. 
+
+Fill in the repo and path: 
+
+<img src="images/05-deploy1.png">
+
+Click "Deploy" and the app is deployed to the public cloud. Then any time you do a git push your app will update immediately.
+
+<img src="images/05-deploy2.png">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
