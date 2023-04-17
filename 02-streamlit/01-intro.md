@@ -112,11 +112,43 @@ Click "Deploy" and the app is deployed to the public cloud. Then any time you do
 
 <img src="images/05-deploy2.png">
 
+## st.slider()
+st.slider() displays a slider input widget. Data types supported: int, float, date, time, and datetime.
+```py
+import streamlit as st
+from datetime import time, datetime
 
+st.header('st.slider')
 
+st.subheader('Slider')
+age = st.slider('How old are you?', 0, 130, 10) # returns the val of the slider
+#                text of slider     min/max, default val
+st.write("I'm ", age, 'years old')
 
+st.subheader('Range slider')
+values = st.slider(
+     'Select a range of values',
+     0.0, 100.0, (25.0, 75.0))
+#                tuple of default range
+st.write('Values:', values)
 
+st.subheader('Range time slider')
+appointment = st.slider(
+     "Schedule your appointment:",
+     value=(time(11, 30), time(13, 45)))
+#    default value range as a tuple, need to specify value because skipped min/max value
+st.write("You're scheduled for:", appointment)
 
+st.subheader('Datetime slider')
+start_time = st.slider(
+     "When do you start?",
+     value=datetime(2020, 1, 1, 9, 30),
+     format="MM/DD/YY - hh:mm")
+#    sets the default display format of values
+st.write("Start time:", start_time)
+```
+
+<img src="images/06-slider.png">
 
 
 
@@ -156,7 +188,8 @@ Click "Deploy" and the app is deployed to the public cloud. Then any time you do
 
 ## References
 - `https://30days.streamlit.app/`
-- `https://docs.streamlit.io/library/api-reference/widgets/st.button`
+- `https://docs.streamlit.io/library/api-reference`
+- `https://share.streamlit.io/`
 - `https://www.youtube.com/watch?v=Yk-unX4KnV4`
 
 

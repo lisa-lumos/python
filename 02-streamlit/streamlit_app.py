@@ -32,8 +32,38 @@ import streamlit as st
 #      x='a', y='b', size='c', color='c', tooltip=['a', 'b', 'c'])
 # st.write(c) # display a chart plot
 
-# ----------- 4. st.write() -----------
+# ----------- 4. st.slider() -----------
+import streamlit as st
+from datetime import time, datetime
 
+st.header('st.slider')
+
+st.subheader('Slider')
+age = st.slider('How old are you?', 0, 130, 10) # returns the val of the slider
+#                text of slider     min/max, default val
+st.write("I'm ", age, 'years old')
+
+st.subheader('Range slider')
+values = st.slider(
+     'Select a range of values',
+     0.0, 100.0, (25.0, 75.0))
+#                tuple of default range
+st.write('Values:', values)
+
+st.subheader('Range time slider')
+appointment = st.slider(
+     "Schedule your appointment:",
+     value=(time(11, 30), time(13, 45)))
+#    default value range as a tuple, need to specify value because skipped min/max value
+st.write("You're scheduled for:", appointment)
+
+st.subheader('Datetime slider')
+start_time = st.slider(
+     "When do you start?",
+     value=datetime(2020, 1, 1, 9, 30),
+     format="MM/DD/YY - hh:mm")
+#    sets the default display format of values
+st.write("Start time:", start_time)
 
 
 
