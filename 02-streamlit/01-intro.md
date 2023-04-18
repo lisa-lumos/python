@@ -150,14 +150,30 @@ st.write("Start time:", start_time)
 
 <img src="images/06-slider.png">
 
+# st.line_chart()
+Good for "just plot this" scenarios, but less customizable. If `st.line_chart` does not guess the data specification correctly, try specifying your desired chart using `st.altair_chart`.
 
+```py
+import streamlit as st
+import pandas as pd
+import numpy as np
 
+st.header('Line chart')
 
+chart_data = pd.DataFrame(
+    np.random.randn(20, 3),
+    columns=['a', 'b', 'c'])
+print(chart_data)
+#            a         b         c
+# 0   1.604629 -0.561202 -1.756648
+# 1   0.234535 -0.639890  0.188274
+# 2  -2.185051  2.692159  0.851398
+# ...
+# 19  0.720349 -2.312322 -0.143059
+st.line_chart(chart_data)
+```
 
-
-
-
-
+<img src="images/07-line_chart.png">
 
 
 
