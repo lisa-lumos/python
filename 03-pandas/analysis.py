@@ -202,6 +202,95 @@ import pandas as pd # pip install pandas
 # fig.savefig("images/06-air-quality.png") # save the figure using the existing Matplotlib method.
 # plt.show() # display the plot
 
+# import pandas as pd
+# air_quality = pd.read_csv("data/air_quality_no2.csv", index_col=0, parse_dates=True)
+# print(air_quality.head())
+# #                      station_antwerp  station_paris  station_london
+# # datetime                                                           
+# # 2019-05-07 02:00:00              NaN            NaN            23.0
+# # 2019-05-07 03:00:00             50.5           25.0            19.0
+# # 2019-05-07 04:00:00             45.0           27.7            19.0
+# # 2019-05-07 05:00:00              NaN           50.4            16.0
+# # 2019-05-07 06:00:00              NaN           61.9             NaN
+
+# air_quality["london_mg_per_cubic"] = air_quality["station_london"] * 1.882 # create a new col from existing col
+# print(air_quality.head())
+# #                      station_antwerp  station_paris  station_london  london_mg_per_cubic
+# # datetime                                                                                
+# # 2019-05-07 02:00:00              NaN            NaN            23.0               43.286
+# # 2019-05-07 03:00:00             50.5           25.0            19.0               35.758
+# # 2019-05-07 04:00:00             45.0           27.7            19.0               35.758
+# # 2019-05-07 05:00:00              NaN           50.4            16.0               30.112
+# # 2019-05-07 06:00:00              NaN           61.9             NaN                  NaN
+
+# air_quality["ratio_paris_antwerp"] = (
+#     air_quality["station_paris"] / air_quality["station_antwerp"]
+# )
+# print(air_quality.head())
+# #                      station_antwerp  station_paris  station_london  london_mg_per_cubic  ratio_paris_antwerp
+# # datetime                                                                                                     
+# # 2019-05-07 02:00:00              NaN            NaN            23.0               43.286                  NaN
+# # 2019-05-07 03:00:00             50.5           25.0            19.0               35.758             0.495050
+# # 2019-05-07 04:00:00             45.0           27.7            19.0               35.758             0.615556
+# # 2019-05-07 05:00:00              NaN           50.4            16.0               30.112                  NaN
+# # 2019-05-07 06:00:00              NaN           61.9             NaN                  NaN                  NaN
+
+# air_quality_renamed = air_quality.rename( # rename col labels using a dict, can also used to rename row labels
+#     columns={
+#         "station_antwerp": "BETR801",
+#         "station_paris": "FR04014",
+#         "station_london": "London Westminster",
+#     }
+# )
+# print(air_quality_renamed.head())
+# #                      BETR801  FR04014  London Westminster  london_mg_per_cubic  ratio_paris_antwerp
+# # datetime                                                                                           
+# # 2019-05-07 02:00:00      NaN      NaN                23.0               43.286                  NaN
+# # 2019-05-07 03:00:00     50.5     25.0                19.0               35.758             0.495050
+# # 2019-05-07 04:00:00     45.0     27.7                19.0               35.758             0.615556
+# # 2019-05-07 05:00:00      NaN     50.4                16.0               30.112                  NaN
+# # 2019-05-07 06:00:00      NaN     61.9                 NaN                  NaN                  NaN
+
+# air_quality_renamed = air_quality_renamed.rename(columns=str.lower) # rename all col labels to its lower case
+# print(air_quality_renamed.head())
+# #                      betr801  fr04014  london westminster  london_mg_per_cubic  ratio_paris_antwerp
+# # datetime                                                                                           
+# # 2019-05-07 02:00:00      NaN      NaN                23.0               43.286                  NaN
+# # 2019-05-07 03:00:00     50.5     25.0                19.0               35.758             0.495050
+# # 2019-05-07 04:00:00     45.0     27.7                19.0               35.758             0.615556
+# # 2019-05-07 05:00:00      NaN     50.4                16.0               30.112                  NaN
+# # 2019-05-07 06:00:00      NaN     61.9                 NaN                  NaN                  NaN
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
