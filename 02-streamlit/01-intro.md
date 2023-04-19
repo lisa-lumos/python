@@ -150,7 +150,7 @@ st.write("Start time:", start_time)
 
 <img src="images/06-slider.png">
 
-# st.line_chart()
+## st.line_chart()
 Good for "just plot this" scenarios, but less customizable. If `st.line_chart` does not guess the data specification correctly, try specifying your desired chart using `st.altair_chart`.
 
 ```py
@@ -175,8 +175,17 @@ st.line_chart(chart_data)
 
 <img src="images/07-line_chart.png">
 
+## st.selectbox()
+```py
+import streamlit as st
 
-
+st.header('st.selectbox')
+option = st.selectbox(
+     'What is your favorite color?', # display the question
+     ('Blue', 'Red', 'Green')) # choices for users
+st.write('Your favorite color is ', option)
+```
+<img src="images/08-selectbox.png">
 
 
 

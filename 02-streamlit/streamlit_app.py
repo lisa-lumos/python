@@ -66,25 +66,31 @@ import streamlit as st
 # st.write("Start time:", start_time)
 
 # ----------- 5. st.line_chart() -----------
+# import streamlit as st
+# import pandas as pd
+# import numpy as np
+
+# st.header('Line chart')
+
+# chart_data = pd.DataFrame(
+#     np.random.randn(20, 3),
+#     columns=['a', 'b', 'c'])
+# print(chart_data)
+# #            a         b         c
+# # 0   1.604629 -0.561202 -1.756648
+# # 1   0.234535 -0.639890  0.188274
+# # 2  -2.185051  2.692159  0.851398
+# # ...
+# # 19  0.720349 -2.312322 -0.143059
+# st.line_chart(chart_data)
+
 import streamlit as st
-import pandas as pd
-import numpy as np
 
-st.header('Line chart')
-
-chart_data = pd.DataFrame(
-    np.random.randn(20, 3),
-    columns=['a', 'b', 'c'])
-print(chart_data)
-#            a         b         c
-# 0   1.604629 -0.561202 -1.756648
-# 1   0.234535 -0.639890  0.188274
-# 2  -2.185051  2.692159  0.851398
-# ...
-# 19  0.720349 -2.312322 -0.143059
-st.line_chart(chart_data)
-
-
+st.header('st.selectbox')
+option = st.selectbox(
+     'What is your favorite color?', # display the question
+     ('Blue', 'Red', 'Green')) # choices for users
+st.write('Your favorite color is ', option)
 
 
 
