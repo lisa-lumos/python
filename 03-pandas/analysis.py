@@ -261,10 +261,87 @@ import pandas as pd # pip install pandas
 # # 2019-05-07 05:00:00      NaN     50.4                16.0               30.112                  NaN
 # # 2019-05-07 06:00:00      NaN     61.9                 NaN                  NaN                  NaN
 
+# import pandas as pd
+# titanic = pd.read_csv("data/titanic.csv")
+# print(titanic.head())
+# #    PassengerId  Survived  Pclass  ...     Fare Cabin  Embarked
+# # 0            1         0       3  ...   7.2500   NaN         S
+# # 1            2         1       1  ...  71.2833   C85         C
+# # 2            3         1       3  ...   7.9250   NaN         S
+# # 3            4         1       1  ...  53.1000  C123         S
+# # 4            5         0       3  ...   8.0500   NaN         S
 
+# print(titanic["Age"].mean()) # 29.69911764705882 # calculate the average of a col
 
+# print(titanic[["Age", "Fare"]].median()) # calculate the median of two cols separately
+# # Age     28.0000
+# # Fare    14.4542
+# # dtype: float64
 
+# print(titanic[["Age", "Fare"]].describe()) # return aggregating stats for two cols separately
+# #               Age        Fare
+# # count  714.000000  891.000000
+# # mean    29.699118   32.204208
+# # std     14.526497   49.693429
+# # min      0.420000    0.000000
+# # 25%     20.125000    7.910400
+# # 50%     28.000000   14.454200
+# # 75%     38.000000   31.000000
+# # max     80.000000  512.329200
 
+# print(titanic.agg(
+#     {
+#         "Age": ["min", "max", "median", "skew"], # specify a list of what you want for each col
+#         "Fare": ["min", "max", "median", "mean"],
+#     }
+# ))
+# #               Age        Fare
+# # min      0.420000    0.000000
+# # max     80.000000  512.329200
+# # median  28.000000   14.454200
+# # skew     0.389108         NaN
+# # mean          NaN   32.204208
+
+# print(titanic[["Sex", "Age"]].groupby("Sex").mean()) # return avg of each group
+# #               Age
+# # Sex              
+# # female  27.915709
+# # male    30.726645
+
+# print(titanic.groupby("Sex").mean(numeric_only=True)) # group by sex, then return avg of all num cols
+# #         PassengerId  Survived    Pclass        Age     SibSp     Parch       Fare
+# # Sex                                                                              
+# # female   431.028662  0.742038  2.159236  27.915709  0.694268  0.649682  44.479818
+# # male     454.147314  0.188908  2.389948  30.726645  0.429809  0.235702  25.523893
+
+# print(titanic.groupby("Sex")["Age"].mean()) # can select a col after grouping
+# # Sex
+# # female    27.915709
+# # male      30.726645
+# # Name: Age, dtype: float64
+
+# print(titanic.groupby(["Sex", "Pclass"])["Fare"].mean()) # group by two cols first, then return avg fare
+# # Sex     Pclass
+# # female  1         106.125798
+# #         2          21.970121
+# #         3          16.118810
+# # male    1          67.226127
+# #         2          19.741782
+# #         3          12.661633
+# # Name: Fare, dtype: float64
+
+# print(titanic["Pclass"].value_counts()) # (shortcut) count num of records for each category in Pclass
+# # 3    491
+# # 1    216
+# # 2    184
+# # Name: Pclass, dtype: int64
+
+# print(titanic.groupby("Pclass")["Pclass"].count()) # the actual form of above query
+# # Pclass
+# # 1    216
+# # 2    184
+# # 3    491
+# # Name: Pclass, dtype: int64
 
 
 
