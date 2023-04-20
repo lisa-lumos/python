@@ -187,19 +187,191 @@ st.write('Your favorite color is ', option)
 ```
 <img src="images/08-selectbox.png">
 
+## st.multiselect()
+```py
+import streamlit as st
+st.header('st.multiselect')
+options = st.multiselect(
+     'What are your favorite colors', # question to display
+     ['Green', 'Yellow', 'Red', 'Blue'], # list of choices
+     ['Yellow', 'Red']) # default choices
+st.write('You selected:', options)
+```
+
+<img src="images/09-multiselect.png">
+
+## st.checkbox
+```py
+import streamlit as st
+st.header('st.checkbox')
+st.write ('What would you like to order?')
+icecream = st.checkbox('Ice cream')
+coffee = st.checkbox('Coffee')
+cola = st.checkbox('Cola')
+if icecream:
+     st.write("Great! Here's some more 🍦")
+if coffee: 
+     st.write("Okay, here's some coffee ☕")
+if cola:
+     st.write("Here you go 🥤")
+```
+
+<img src="images/10-checkbox.png">
+
+## Streamlit Components
+Components are third-party Python modules that extend Streamlit, such as `streamlit_pandas_profiling`
+```py
+import streamlit as st
+import pandas as pd
+import pandas_profiling
+from streamlit_pandas_profiling import st_profile_report # pip install streamlit_pandas_profiling
+
+st.header('`streamlit_pandas_profiling`')
+df = pd.read_csv('https://raw.githubusercontent.com/dataprofessor/data/master/penguins_cleaned.csv')
+pr = df.profile_report() # generate pandas profiling report
+st_profile_report(pr) # display
+```
+
+<img src="images/11-components.png">
+
+## st.latex
+Display math expressions formatted as LaTeX.
+```py
+import streamlit as st
+
+st.header('st.latex')
+st.latex(r'''
+     a + ar + a r^2 + a r^3 + \cdots + a r^{n-1} =
+     \sum_{k=0}^{n-1} ar^k =
+     a \left(\frac{1-r^{n}}{1-r}\right)
+     ''')
+```
+
+<img src="images/12-latex.png">
+
+## App theme customization
+Create a theme file in the follow path: `.streamlit/config.toml`, and put the following content in:
+```
+[theme]
+primaryColor="#F39C12"
+backgroundColor="#2E86C1"
+secondaryBackgroundColor="#AED6F1"
+textColor="#FFFFFF"
+font="monospace"
+```
+
+And in the python file: 
+```py
+import streamlit as st
+st.title('Customizing the theme of Streamlit apps')
+st.write('Contents of the `.streamlit/config.toml` file of this app')
+st.code("""
+[theme]
+primaryColor="#F39C12"
+backgroundColor="#2E86C1"
+secondaryBackgroundColor="#AED6F1"
+textColor="#FFFFFF"
+font="monospace"
+""") # display a code block
+number = st.sidebar.slider('Select a number:', 0, 10, 5)
+st.write('Selected number from slider widget is:', number)
+```
+
+Note that although `streamlit run file.py` could refresh the app when the contents of the file changes, but to allow it to incorporate this theme file, we need to re-run this command. 
+
+<img src="images/13-theme.png">
+
+## st.secrets
+Store confidential info such as API keys, database passwords, etc.
+```py
+import streamlit as st
+st.title('st.secrets')
+st.write(st.secrets['message'])
+```
+Secrets can be stored in Streamlit Community Cloud, or, if working locally, they can be stored in `.streamlit/secrets.toml`, but make sure to NOT uploading it to a GitHub repo when deploying the app.
+
+## st.file_uploader
+By default, uploaded files are limited to 200MB. You can configure this using the server.maxUploadSize config option.
+```py
+import streamlit as st
+import pandas as pd
+
+st.title('st.file_uploader')
+st.subheader('Input CSV')
+uploaded_file = st.file_uploader("Choose a file")
+if uploaded_file is not None:
+  df = pd.read_csv(uploaded_file)
+  st.subheader('DataFrame')
+  st.write(df)
+  st.subheader('Descriptive Statistics')
+  st.write(df.describe())
+else:
+  st.info('☝️ Upload a CSV file')
+```
+
+<img src="images/14-file_uploader.png">
+
+## 
 
 
 
 
+## 
 
 
 
 
+## 
 
 
 
 
+## 
 
+
+
+
+## 
+
+
+
+
+## 
+
+
+
+
+## 
+
+
+
+
+## 
+
+
+
+
+## 
+
+
+
+
+## 
+
+
+
+
+## 
+
+
+
+
+## 
+
+
+
+
+## 
 
 
 
