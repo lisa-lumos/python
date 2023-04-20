@@ -343,6 +343,163 @@ import pandas as pd # pip install pandas
 # # 3    491
 # # Name: Pclass, dtype: int64
 
+# import pandas as pd
+# import matplotlib.pyplot as plt
+# titanic = pd.read_csv("data/titanic.csv")
+# print(titanic.head())
+# #    PassengerId  Survived  Pclass  ...     Fare Cabin  Embarked
+# # 0            1         0       3  ...   7.2500   NaN         S
+# # 1            2         1       1  ...  71.2833   C85         C
+# # 2            3         1       3  ...   7.9250   NaN         S
+# # 3            4         1       1  ...  53.1000  C123         S
+# # 4            5         0       3  ...   8.0500   NaN         S
+
+# print(titanic.sort_values(by="Age").head()) # sort data by age
+# #      PassengerId  Survived  Pclass                             Name  ...  Ticket     Fare  Cabin  Embarked
+# # 803          804         1       3  Thomas, Master. Assad Alexander  ...    2625   8.5167    NaN         C
+# # 755          756         1       2        Hamalainen, Master. Viljo  ...  250649  14.5000    NaN         S
+# # 644          645         1       3           Baclini, Miss. Eugenie  ...    2666  19.2583    NaN         C
+# # 469          470         1       3    Baclini, Miss. Helene Barbara  ...    2666  19.2583    NaN         C
+# # 78            79         1       2    Caldwell, Master. Alden Gates  ...  248738  29.0000    NaN         S
+
+# print(titanic.sort_values(by=['Pclass', 'Age'], ascending=False).head()) # sort by class then age
+# #      PassengerId  Survived  Pclass                       Name     Sex  ...  Parch  Ticket    Fare Cabin  Embarked
+# # 851          852         0       3        Svensson, Mr. Johan    male  ...      0  347060  7.7750   NaN         S
+# # 116          117         0       3       Connors, Mr. Patrick    male  ...      0  370369  7.7500   NaN         Q
+# # 280          281         0       3           Duane, Mr. Frank    male  ...      0  336439  7.7500   NaN         Q
+# # 483          484         1       3     Turkula, Mrs. (Hedwig)  female  ...      0    4134  9.5875   NaN         S
+# # 326          327         0       3  Nysveen, Mr. Johan Hansen    male  ...      0  345364  6.2375   NaN         S
+
+# air_quality = pd.read_csv(
+#     "data/air_quality_long.csv", index_col="date.utc", parse_dates=True
+# )
+# print(air_quality.head())
+# #                                 city country location parameter  value   unit
+# # date.utc                                                                     
+# # 2019-06-18 06:00:00+00:00  Antwerpen      BE  BETR801      pm25   18.0  µg/m³
+# # 2019-06-17 08:00:00+00:00  Antwerpen      BE  BETR801      pm25    6.5  µg/m³
+# # 2019-06-17 07:00:00+00:00  Antwerpen      BE  BETR801      pm25   18.5  µg/m³
+# # 2019-06-17 06:00:00+00:00  Antwerpen      BE  BETR801      pm25   16.0  µg/m³
+# # 2019-06-17 05:00:00+00:00  Antwerpen      BE  BETR801      pm25    7.5  µg/m³
+
+# no2 = air_quality[air_quality["parameter"] == "no2"] # filter for no2 data only
+# print(no2.head())
+# #                             city country location parameter  value   unit
+# # date.utc                                                                 
+# # 2019-06-21 00:00:00+00:00  Paris      FR  FR04014       no2   20.0  µg/m³
+# # 2019-06-20 23:00:00+00:00  Paris      FR  FR04014       no2   21.8  µg/m³
+# # 2019-06-20 22:00:00+00:00  Paris      FR  FR04014       no2   26.5  µg/m³
+# # 2019-06-20 21:00:00+00:00  Paris      FR  FR04014       no2   24.9  µg/m³
+# # 2019-06-20 20:00:00+00:00  Paris      FR  FR04014       no2   21.4  µg/m³
+
+# no2_subset = no2.sort_index().groupby(["location"]).head(2) # only select first 2 records in each location group
+# print(no2_subset)
+# #                                 city country            location parameter  value   unit
+# # date.utc                                                                                
+# # 2019-04-09 01:00:00+00:00  Antwerpen      BE             BETR801       no2   22.5  µg/m³
+# # 2019-04-09 01:00:00+00:00      Paris      FR             FR04014       no2   24.4  µg/m³
+# # 2019-04-09 02:00:00+00:00     London      GB  London Westminster       no2   67.0  µg/m³
+# # 2019-04-09 02:00:00+00:00  Antwerpen      BE             BETR801       no2   53.5  µg/m³
+# # 2019-04-09 02:00:00+00:00      Paris      FR             FR04014       no2   27.4  µg/m³
+# # 2019-04-09 03:00:00+00:00     London      GB  London Westminster       no2   67.0  µg/m³
+
+# pivoted = no2_subset.pivot(
+#     columns="location", # use vals in location field as col names
+#     values="value" # the vals in value column are table contents
+#     ) # rearrange table
+# print(pivoted)
+# # location                   BETR801  FR04014  London Westminster
+# # date.utc                                                       
+# # 2019-04-09 01:00:00+00:00     22.5     24.4                 NaN
+# # 2019-04-09 02:00:00+00:00     53.5     27.4                67.0
+# # 2019-04-09 03:00:00+00:00      NaN      NaN                67.0
+
+# pivoted = air_quality.pivot_table(
+#     values="value", # the vals in value column are table contents
+#     index="location", # use vals in location field as row names
+#     columns="parameter", # use vals in parameter field as col names
+#     aggfunc="mean" # aggregate vals with this
+# ) # rearrange and aggregate
+# print(pivoted)
+# # parameter                 no2       pm25
+# # location                                
+# # BETR801             26.950920  23.169492
+# # FR04014             29.374284        NaN
+# # London Westminster  29.740050  13.443568
+
+# pivoted = air_quality.pivot_table(
+#     values="value",
+#     index="location",
+#     columns="parameter",
+#     aggfunc="mean",
+#     margins=True, # include subtotals
+# )
+# print(pivoted)
+# # parameter                 no2       pm25        All
+# # location                                           
+# # BETR801             26.950920  23.169492  24.982353
+# # FR04014             29.374284        NaN  29.374284
+# # London Westminster  29.740050  13.443568  21.491708
+# # All                 29.430316  14.386849  24.222743
+
+# print(air_quality.groupby(["parameter", "location"]).mean()) # same effect as above
+# # parameter location                     
+# # no2       BETR801             26.950920
+# #           FR04014             29.374284
+# #           London Westminster  29.740050
+# # pm25      BETR801             23.169492
+# #           London Westminster  13.443568
+
+# no2_pivoted = no2.pivot(columns="location", values="value").reset_index()
+# print(no2_pivoted.head())
+# # location                  date.utc  BETR801  FR04014  London Westminster
+# # 0        2019-04-09 01:00:00+00:00     22.5     24.4                 NaN
+# # 1        2019-04-09 02:00:00+00:00     53.5     27.4                67.0
+# # 2        2019-04-09 03:00:00+00:00     54.5     34.2                67.0
+# # 3        2019-04-09 04:00:00+00:00     34.5     48.5                41.0
+# # 4        2019-04-09 05:00:00+00:00     46.5     59.5                41.0
+
+# no_2 = no2_pivoted.melt(id_vars="date.utc") # convert from wide format to long format. The col headers become vals in the newly created column "location"
+# print(no_2.head())
+# #                    date.utc location  value
+# # 0 2019-04-09 01:00:00+00:00  BETR801   22.5
+# # 1 2019-04-09 02:00:00+00:00  BETR801   53.5
+# # 2 2019-04-09 03:00:00+00:00  BETR801   54.5
+# # 3 2019-04-09 04:00:00+00:00  BETR801   34.5
+# # 4 2019-04-09 05:00:00+00:00  BETR801   46.5
+
+# no_2 = no2_pivoted.melt( # more control for the above shortcut
+#     id_vars="date.utc",
+#     value_vars=["BETR801", "FR04014", "London Westminster"], # columns to melt together, becomes long
+#     value_name="NO_2", # new vals col name
+#     var_name="id_location", # melted vars has this column name
+# )
+# print(no_2.head())
+# #                    date.utc id_location  NO_2
+# # 0 2019-04-09 01:00:00+00:00     BETR801  22.5
+# # 1 2019-04-09 02:00:00+00:00     BETR801  53.5
+# # 2 2019-04-09 03:00:00+00:00     BETR801  54.5
+# # 3 2019-04-09 04:00:00+00:00     BETR801  34.5
+# # 4 2019-04-09 05:00:00+00:00     BETR801  46.5
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
