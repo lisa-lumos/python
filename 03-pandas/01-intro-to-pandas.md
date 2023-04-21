@@ -542,35 +542,117 @@ print(no_2.head())
 ```
 
 ## combine data from multiple tables
+```py
+import pandas as pd
 
+air_quality_no2 = pd.read_csv("data/air_quality_no2_long.csv",
+                              parse_dates=True)
+air_quality_no2 = air_quality_no2[["date.utc", "location",
+                                   "parameter", "value"]]
+print(air_quality_no2.head())
+#                     date.utc location parameter  value
+# 0  2019-06-21 00:00:00+00:00  FR04014       no2   20.0
+# 1  2019-06-20 23:00:00+00:00  FR04014       no2   21.8
+# 2  2019-06-20 22:00:00+00:00  FR04014       no2   26.5
+# 3  2019-06-20 21:00:00+00:00  FR04014       no2   24.9
+# 4  2019-06-20 20:00:00+00:00  FR04014       no2   21.4
 
+air_quality_pm25 = pd.read_csv("data/air_quality_pm25_long.csv",
+                               parse_dates=True)
+air_quality_pm25 = air_quality_pm25[["date.utc", "location",
+                                     "parameter", "value"]]
+print(air_quality_pm25.head())
+#                     date.utc location parameter  value
+# 0  2019-06-18 06:00:00+00:00  BETR801      pm25   18.0
+# 1  2019-06-17 08:00:00+00:00  BETR801      pm25    6.5
+# 2  2019-06-17 07:00:00+00:00  BETR801      pm25   18.5
+# 3  2019-06-17 06:00:00+00:00  BETR801      pm25   16.0
+# 4  2019-06-17 05:00:00+00:00  BETR801      pm25    7.5
 
+air_quality = pd.concat(
+    [air_quality_pm25, 
+     air_quality_no2], 
+     axis=0 # 0 means along the y axis (default); 1 means x axis
+    ) # this is like a union all
+print(air_quality) # note that row label has duplicates: [0, 1110), then [0, 2068)
+#                        date.utc            location parameter  value
+# 0     2019-06-18 06:00:00+00:00             BETR801      pm25   18.0
+# 1     2019-06-17 08:00:00+00:00             BETR801      pm25    6.5
+# 2     2019-06-17 07:00:00+00:00             BETR801      pm25   18.5
+# 3     2019-06-17 06:00:00+00:00             BETR801      pm25   16.0
+# 4     2019-06-17 05:00:00+00:00             BETR801      pm25    7.5
+# ...                         ...                 ...       ...    ...
+# 2063  2019-05-07 06:00:00+00:00  London Westminster       no2   26.0
+# 2064  2019-05-07 04:00:00+00:00  London Westminster       no2   16.0
+# 2065  2019-05-07 03:00:00+00:00  London Westminster       no2   19.0
+# 2066  2019-05-07 02:00:00+00:00  London Westminster       no2   19.0
+# 2067  2019-05-07 01:00:00+00:00  London Westminster       no2   23.0
 
+print(air_quality_pm25.shape) # (1110, 4)
+print(air_quality_no2.shape)  # (2068, 4)
+print(air_quality.shape)      # (3178, 4)
 
+air_quality = air_quality.sort_values("date.utc")
+print(air_quality.head())
+#                        date.utc            location parameter  value
+# 2067  2019-05-07 01:00:00+00:00  London Westminster       no2   23.0
+# 1003  2019-05-07 01:00:00+00:00             FR04014       no2   25.0
+# 100   2019-05-07 01:00:00+00:00             BETR801      pm25   12.5
+# 1098  2019-05-07 01:00:00+00:00             BETR801       no2   50.5
+# 1109  2019-05-07 01:00:00+00:00  London Westminster      pm25    8.0
 
+air_quality_ = pd.concat(
+    [air_quality_pm25, air_quality_no2], 
+    keys=["PM25", "NO2"] # new row index/label assigned for each original table
+) # more controls with concat
+print(air_quality_.head())
+#                          date.utc location parameter  value
+# PM25 0  2019-06-18 06:00:00+00:00  BETR801      pm25   18.0
+#      1  2019-06-17 08:00:00+00:00  BETR801      pm25    6.5
+#      2  2019-06-17 07:00:00+00:00  BETR801      pm25   18.5
+#      3  2019-06-17 06:00:00+00:00  BETR801      pm25   16.0
+#      4  2019-06-17 05:00:00+00:00  BETR801      pm25    7.5
 
+stations_coord = pd.read_csv("data/air_quality_stations.csv")
+print(stations_coord.head())
+#   location  coordinates.latitude  coordinates.longitude
+# 0  BELAL01              51.23619                4.38522
+# 1  BELHB23              51.17030                4.34100
+# 2  BELLD01              51.10998                5.00486
+# 3  BELLD02              51.12038                5.02155
+# 4  BELR833              51.32766                4.36226
 
+air_quality = pd.merge(air_quality, stations_coord, how="left", on="location") # this is like a left join
+print(air_quality.head())
+#                     date.utc            location parameter  value  coordinates.latitude  coordinates.longitude
+# 0  2019-05-07 01:00:00+00:00  London Westminster       no2   23.0              51.49467               -0.13193
+# 1  2019-05-07 01:00:00+00:00             FR04014       no2   25.0              48.83724                2.39390
+# 2  2019-05-07 01:00:00+00:00             FR04014       no2   25.0              48.83722                2.39390
+# 3  2019-05-07 01:00:00+00:00             BETR801      pm25   12.5              51.20966                4.43182
+# 4  2019-05-07 01:00:00+00:00             BETR801       no2   50.5              51.20966                4.43182
 
+air_quality_parameters = pd.read_csv("data/air_quality_parameters.csv")
+print(air_quality_parameters.head())
+#      id                                        description  name
+# 0    bc                                       Black Carbon    BC
+# 1    co                                    Carbon Monoxide    CO
+# 2   no2                                   Nitrogen Dioxide   NO2
+# 3    o3                                              Ozone    O3
+# 4  pm10  Particulate matter less than 10 micrometers in...  PM10
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+air_quality = pd.merge(air_quality, 
+                       air_quality_parameters,
+                       how='left', # left join
+                       left_on='parameter', # on t1.parameter = t2.id
+                       right_on='id')
+print(air_quality.head())
+#                     date.utc            location parameter  value  ...  coordinates.longitude    id                                        description   name
+# 0  2019-05-07 01:00:00+00:00  London Westminster       no2   23.0  ...               -0.13193   no2                                   Nitrogen Dioxide    NO2
+# 1  2019-05-07 01:00:00+00:00             FR04014       no2   25.0  ...                2.39390   no2                                   Nitrogen Dioxide    NO2
+# 2  2019-05-07 01:00:00+00:00             FR04014       no2   25.0  ...                2.39390   no2                                   Nitrogen Dioxide    NO2
+# 3  2019-05-07 01:00:00+00:00             BETR801      pm25   12.5  ...                4.43182  pm25  Particulate matter less than 2.5 micrometers i...  PM2.5
+# 4  2019-05-07 01:00:00+00:00             BETR801       no2   50.5  ...                4.43182   no2                                   Nitrogen Dioxide    NO2
+```
 
 ## handle time series data
 
