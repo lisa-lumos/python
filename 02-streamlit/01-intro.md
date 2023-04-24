@@ -351,6 +351,194 @@ with col3:
 
 <img src="images/15-layout.png">
 
+## st.progress
+Displays a progress bar that updates graphically as the iteration progresses.
+
+```py
+import streamlit as st
+import time
+
+st.title('st.progress')
+with st.expander('About this app'):
+     st.write('You can now display the progress of your calculations in a Streamlit app with the `st.progress` command.')
+my_bar = st.progress(0) # 0 is starting val
+for percent_complete in range(100):
+     time.sleep(0.05)
+     my_bar.progress(percent_complete + 1)
+st.balloons()
+```
+
+<img src="images/16-progress.png">
+
+## st.form
+Creates a form that batches elements together with a "Submit" button.
+
+Typically, when a user interacts with a widget, the Streamlit app is rerun. A form is a container that visually groups elements/widgets together, so a user can interact with widgets for as many times as they like without causing a rerun. Finally, when the form's Submit button is pressed, all widget values inside the form will be sent to Streamlit in a single batch.
+
+To add elements to a form object, you can use the with notation (preferred). 
+
+Constraints:
+- Every form must contain a st.form_submit_button.
+- st.button and st.download_button cannot be added to a form.
+- Forms can appear anywhere in your app (sidebar, columns, etc), but they cannot be nested in other forms.
+
+```py
+import streamlit as st
+
+st.title('st.form')
+
+# Full example of using the with notation
+st.header('1. Example of using `with` notation (recommended)')
+st.subheader('Coffee machine')
+
+with st.form('my_form'):
+    st.subheader('**Order your coffee**')
+    # Input widgets
+    coffee_bean_val = st.selectbox('Coffee bean', ['Arabica', 'Robusta'])
+    coffee_roast_val = st.selectbox('Coffee roast', ['Light', 'Medium', 'Dark'])
+    brewing_val = st.selectbox('Brewing method', ['Aeropress', 'Drip', 'French press', 'Moka pot', 'Siphon'])
+    serving_type_val = st.selectbox('Serving format', ['Hot', 'Iced', 'Frappe'])
+    milk_val = st.select_slider('Milk intensity', ['None', 'Low', 'Medium', 'High'])
+    owncup_val = st.checkbox('Bring own cup')
+    submitted = st.form_submit_button('Submit') # Every form must have a submit button
+
+if submitted:
+    st.markdown(f'''
+        ☕ You have ordered:
+        - Coffee bean: `{coffee_bean_val}`
+        - Coffee roast: `{coffee_roast_val}`
+        - Brewing: `{brewing_val}`
+        - Serving type: `{serving_type_val}`
+        - Milk: `{milk_val}`
+        - Bring own cup: `{owncup_val}`
+        ''')
+else:
+    st.write('☝️ Place your order!')
+
+# Short example of using an object notation
+st.header('2. Example of object notation')
+form = st.form('my_form_2')
+selected_val = form.slider('Select a value')
+form.form_submit_button('Submit')
+st.write('Selected value: ', selected_val)
+```
+
+<img src="images/17-form1.png">
+<img src="images/17-form2.png">
+
+## st.experimental_get_query_params
+Retrieve query parameters directly from the URL of the user's browser.
+```py
+import streamlit as st
+
+st.title('st.experimental_get_query_params')
+with st.expander('About this app'):
+  st.write("`st.experimental_get_query_params` allows the retrieval of query parameters directly from the URL of the user's browser.")
+
+# 1. Instructions
+st.header('1. Instructions')
+st.markdown('''
+In the URL bar of your browser, append the following:
+`?firstname=Jack&surname=Beanstalk`
+after the base URL `http://share.streamlit.io/dataprofessor/st.experimental_get_query_params/`
+such that it becomes 
+`http://share.streamlit.io/dataprofessor/st.experimental_get_query_params/?firstname=Jack&surname=Beanstalk`
+''')
+
+# 2. Contents of st.experimental_get_query_params
+st.header('2. Contents of st.experimental_get_query_params')
+st.write(st.experimental_get_query_params())
+
+# 3. Retrieving and displaying information from the URL
+st.header('3. Retrieving and displaying information from the URL')
+firstname = st.experimental_get_query_params()['firstname'][0]
+surname = st.experimental_get_query_params()['surname'][0]
+st.write(f'Hello **{firstname} {surname}**, how are you?')
+```
+
+<img src="images/18-query-params.png">
+
+## st.cache
+Used to optimize the performance of your Streamlit app. Allows your app to stay performant even when loading data from the web, manipulating large datasets, or performing expensive computations, with the `@st.cache` decorator.
+
+When you mark a function with the `@st.cache` decorator, it tells Streamlit that whenever the function is called it needs to check 4 things:
+1. The input param that the function is called with
+2. The val of any external variable used in the function
+3. The body of the function
+4. The body of functions used inside the cached function
+
+If this is the first time Streamlit has seen these 4 components with these exact values, it runs the function and stores the result in a local cache. Then, next time the cached function is called, if none of these components changed, Streamlit will just use the cache.
+
+`@st.cache` supports arguments to configure the cache's behavior. 
+
+```py
+import streamlit as st
+import numpy as np
+import pandas as pd
+from time import time
+st.title('st.cache_data')
+
+# Using cache
+a0 = time()
+st.subheader('Using st.cache_data')
+@st.cache_data()
+def load_data_a():
+  df = pd.DataFrame(
+    np.random.rand(2000000, 5),
+    columns=['a', 'b', 'c', 'd', 'e']
+  )
+  return df
+st.write(load_data_a())
+a1 = time()
+st.info(a1-a0)
+
+# Not using cache
+b0 = time()
+st.subheader('Not using st.cache')
+def load_data_b():
+  df = pd.DataFrame(
+    np.random.rand(2000000, 5),
+    columns=['a', 'b', 'c', 'd', 'e']
+  )
+  return df
+st.write(load_data_b())
+b1 = time()
+st.info(b1-b0)
+```
+
+The first run may provide roughly similar run time. Reload the app and notice the run time decrease when using the st.cache decorator.
+
+## st.session_state
+Allows to share variables between reruns, within each user session.
+
+The access to a Streamlit app in a browser tab is called a session. For each browser tab that connects to the Streamlit server, a new session is created - Streamlit reruns your script from top to bottom every time. Each rerun takes place in a blank slate: no variables are shared between runs.
+
+Session State is a way to share variables between reruns, for each user session. In addition to the ability to store and persist state, Streamlit also exposes the ability to manipulate state using Callbacks.
+
+```py
+import streamlit as st
+st.title('st.session_state')
+
+def lbs_to_kg():
+  st.session_state.kg = st.session_state.lbs/2.2046
+def kg_to_lbs():
+  st.session_state.lbs = st.session_state.kg*2.2046
+
+st.header('Input')
+col1, spacer, col2 = st.columns([2,1,2])
+with col1:
+  pounds = st.number_input("Pounds:", key = "lbs", on_change = lbs_to_kg) # with key "lbs", st.session_state.lbs now exists!
+with col2:
+  kilogram = st.number_input("Kilograms:", key = "kg", on_change = kg_to_lbs) # with key "kg", st.session_state.kg now exists!
+
+st.header('Output')
+st.write("st.session_state object:", st.session_state)
+```
+
+Whenever a value in pounds input box changes, the corresponding session var `lbs` changes to the value in the box, and this val change in the box makes `lbs_to_kg` function to run, which updates the `kg` session variable to match the lbs value. And vise versa can happen for the kilograms input box. 
+
+<img src="images/19-session-vars.png">
+
 ## 
 
 
@@ -377,33 +565,6 @@ with col3:
 
 
 ## 
-
-
-
-
-## 
-
-
-
-
-## 
-
-
-
-
-## 
-
-
-
-
-## 
-
-
-
-
-## 
-
-
 
 
 
@@ -411,7 +572,6 @@ with col3:
 ## my notes
 - Clicking a button will not cause the page to reload, instead, its status is set to "got clicked"
 - Selecting a checkbox will cause the app to reload. So if use a checkbox inside a button, the button's state will be lost from refreshing the page when the checkbox got selected (reset to not-got-clicked). So if you use a button, make sure it is the last nested button you use. 
-
 
 ## References
 - `https://30days.streamlit.app/`
