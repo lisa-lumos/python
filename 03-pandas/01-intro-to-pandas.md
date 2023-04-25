@@ -772,11 +772,44 @@ plt.show()
 <img src="images/09-time-series.png">
 
 ## manipulate textual data
+```py
+import pandas as pd
+titanic = pd.read_csv("data/titanic.csv")
+print(titanic.head())
+#    PassengerId  Survived  Pclass                                               Name     Sex   Age  SibSp  Parch            Ticket     Fare Cabin Embarked
+# 0            1         0       3                            Braund, Mr. Owen Harris    male  22.0      1      0         A/5 21171   7.2500   NaN        S
+# 1            2         1       1  Cumings, Mrs. John Bradley (Florence Briggs Th...  female  38.0      1      0          PC 17599  71.2833   C85        C
+# 2            3         1       3                             Heikkinen, Miss. Laina  female  26.0      0      0  STON/O2. 3101282   7.9250   NaN        S
+# 3            4         1       1       Futrelle, Mrs. Jacques Heath (Lily May Peel)  female  35.0      1      0            113803  53.1000  C123        S
+# 4            5         0       3                           Allen, Mr. William Henry    male  35.0      0      0            373450   8.0500   NaN        S
 
+lowercase = titanic["Name"].str.lower() # convert all name characters to lowercase
+print(lowercase.head())
+# 0                              braund, mr. owen harris
+# 1    cumings, mrs. john bradley (florence briggs th...
+# 2                               heikkinen, miss. laina
+# 3         futrelle, mrs. jacques heath (lily may peel)
+# 4                             allen, mr. william henry
+# Name: Name, dtype: object
 
+titanic["Surname"] = titanic["Name"].str.split(",").str.get(0) # create a new col of surname only
+print(titanic["Surname"].head())
+# Name: Name, dtype: object
+# 0       Braund
+# 1      Cumings
+# 2    Heikkinen
+# 3     Futrelle
+# 4        Allen
+# Name: Surname, dtype: object
 
+print(titanic[titanic["Name"].str.contains("Countess")]) # like where in sql
+#      PassengerId  Survived  Pclass                                               Name     Sex   Age  SibSp  Parch  Ticket  Fare Cabin Embarked Surname
+# 759          760         1       1  Rothes, the Countess. of (Lucy Noel Martha Dye...  female  33.0      0      0  110152  86.5   B77        S  Rothes
 
+print(titanic.loc[titanic["Name"].str.len().idxmax(), "Name"]) # the longest name
 
+titanic["Sex_short"] = titanic["Sex"].replace({"male": "M", "female": "F"}) # create a new col from existing col
+```
 
 ## References
 - `https://pandas.pydata.org/docs/getting_started/intro_tutorials/`
