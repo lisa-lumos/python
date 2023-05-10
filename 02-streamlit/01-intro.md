@@ -61,13 +61,6 @@ Run the app, it displays:
 If we click the button, it then displays:
 <img src="images/03-button2.png">
 
-## Data Science portfolio project
-This dashboard analyzes Ken Jee's YouTube channel. It shows the KPIs that he would like to see as a YouTuber. It contains these pages:
-- Aggregate metrics - overall channel health; performance in the last 6 mo vs the baseline; how each individual video performed against the baseline 
-- Individual video analysis - num of views vs subscription in diff countries; views of this video in first 30 days compared to average, top 20%, top 80% videos 
-
-See details in the folder `youtube-data-analysis`
-
 ## st.write()
 st.write allows add the following to the Streamlit app: 
 - Prints strings, works like st.markdown()
