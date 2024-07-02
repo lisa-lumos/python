@@ -1,3 +1,5 @@
+https://docs.python.org/3.12/tutorial/index.html
+
 # 1. Whetting Your Appetite (intro)
 
 # 2. Using the Python Interpreter
