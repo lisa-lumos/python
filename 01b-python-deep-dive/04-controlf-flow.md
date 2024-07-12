@@ -175,8 +175,46 @@ A method is a function that belongs to an object, and is named "obj.method_name"
 
 ## 4.8 More on Defining Functions
 ### 4.8.1 Default Argument Values
+The most useful form is to specify a default value for one or more arguments. This creates a function that can be called with fewer arguments than it is defined.
+
+The default values are evaluated at the point of function definition in the defining scope (top-down), and is evaluated only once. 
 
 ### 4.8.2 Keyword Arguments
+Functions can also be called using keyword arguments:
+```py
+def parrot(voltage, state='a stiff', action='voom', type='Norwegian Blue'):
+    print("-- This parrot wouldn't", action, end=' ')
+    print("if you put", voltage, "volts through it.")
+    print("-- Lovely plumage, the", type)
+    print("-- It's", state, "!")
+  
+parrot(1000)                                          # 1 positional argument
+parrot(voltage=1000)                                  # 1 keyword argument
+parrot(voltage=1000000, action='VOOOOOM')             # 2 keyword arguments
+parrot(action='VOOOOOM', voltage=1000000)             # 2 keyword arguments
+parrot('a million', 'bereft of life', 'jump')         # 3 positional arguments
+parrot('a thousand', state='pushing up the daisies')  # 1 positional, 1 keyword
+```
+
+In a function call, keyword arguments must follow positional arguments. 
+
+`**name` receives a dictionary, `*name` receives a tuple. `*name` must occur before `**name`.
+```py
+def cheeseshop(kind, *arguments, **keywords):
+    print("-- Do you have any", kind, "?")
+    print("-- I'm sorry, we're all out of", kind)
+    for arg in arguments:
+        print(arg)
+    print("-" * 40)
+    for kw in keywords:
+        print(kw, ":", keywords[kw])
+
+cheeseshop("Limburger", "It's very runny, sir.",
+           "It's really very, VERY runny, sir.", # goes into the tuple
+           shopkeeper="Michael Palin",    # goes into the dict
+           client="John Cleese",          # goes into the dict
+           sketch="Cheese Shop Sketch")   # goes into the dict
+```
 
 ### 4.8.3 Special parameters
 #### 4.8.3.1 Positional-or-Keyword Arguments
