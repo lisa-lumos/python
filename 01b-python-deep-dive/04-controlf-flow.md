@@ -217,15 +217,30 @@ cheeseshop("Limburger", "It's very runny, sir.",
 ```
 
 ### 4.8.3 Special parameters
-#### 4.8.3.1 Positional-or-Keyword Arguments
+You can restrict the way a function arguments can be passed, either by:
+- case1: positional-only
+- case2: keyword-only
+- case3: positional and keyword both allowed. 
 
-#### 4.8.3.2 Positional-Only Parameters
+If `/` and `*` are not present in the function definition, it  case3.  
 
-#### 4.8.3.3 Keyword-Only Arguments
+Parameters before the `/` are positional only, and parameters after it are positional-or-keyword, or keyword-only.
 
-#### 4.8.3.4 Function Examples
+Parameters following the `*` are keyword-only.
 
-#### 4.8.3.5 Recap
+```py
+def standard_arg(arg):
+    print(arg)
+
+def pos_only_arg(arg, /):
+    print(arg)
+
+def kwd_only_arg(*, arg):
+    print(arg)
+
+def combined_example(pos_only, /, standard, *, kwd_only):
+    print(pos_only, standard, kwd_only)
+```
 
 ### 4.8.4 Arbitrary Argument Lists
 
