@@ -243,14 +243,63 @@ def combined_example(pos_only, /, standard, *, kwd_only):
 ```
 
 ### 4.8.4 Arbitrary Argument Lists
+You can specify that a function can be called with an arbitrary number of arguments. Not frequently used. These arguments will be wrapped up in a tuple. 
 
 ### 4.8.5 Unpacking Argument Lists
+```py
+list(range(3, 6)) # normal call with separate arguments
+# [3, 4, 5]
+args = [3, 6]
+list(range(*args)) # call with arguments unpacked from a list
+# [3, 4, 5]
+
+def parrot(voltage, state='a stiff', action='voom'):
+    print("-- This parrot wouldn't", action, end=' ')
+    print("if you put", voltage, "volts through it.", end=' ')
+    print("E's", state, "!")
+
+d = {"voltage": "four million", "state": "bleedin' demised", "action": "VOOM"}
+parrot(**d)
+
+```
 
 ### 4.8.6 Lambda Expressions
+Small anonymous functions can be created with the lambda keyword. They are syntactically restricted to a single expression.
+
+```py
+def make_incrementor(n): # returns a function
+    return lambda x: x + n
+
+f = make_incrementor(42)
+f(0) # 42
+f(1) # 43
+
+pairs = [(1, 'one'), (2, 'two'), (3, 'three'), (4, 'four')]
+pairs.sort(key=lambda pair: pair[1]) # pass a function as an argument
+```
 
 ### 4.8.7 Documentation Strings
+conventions:
+- The first line should always be a short, concise summary of the object's purpose. 
+- If there are more lines in the documentation string, the second line should be blank, visually separating the summary from the rest of the description.
+- The following lines should be one or more paragraphs describing the object's calling conventions, its side effects, etc.
 
 ### 4.8.8 Function Annotations
+Function annotations are optional metadata information about the types used by user-defined functions. 
+
+Annotations are stored in the `__annotations__` attribute of the function as a dictionary and have no effect on any other part of the function. 
+
+```py
+def f(ham: str, eggs: str = 'eggs') -> str: # takes 2 strs, returns a str
+    print("Annotations:", f.__annotations__)
+    print("Arguments:", ham, eggs)
+    return ham + ' and ' + eggs
+
+f('spam')
+# Annotations: {'ham': <class 'str'>, 'return': <class 'str'>, 'eggs': <class 'str'>}
+# Arguments: spam eggs
+# 'spam and eggs'
+```
 
 ## 4.9 Intermezzo: Coding Style
 
