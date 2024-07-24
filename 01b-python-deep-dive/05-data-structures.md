@@ -1,8 +1,21 @@
 # 5. Data Structures
 ## 5.1 More on Lists
-list.append()/extend(iterable)/insert(idx, val)/remove(val)/pop(idx)/clear()/index(val)/count(val)/sort()/reverse()/copy()
+- list.append()
+- list.extend(iterable)
+- list.insert(idx, val)
+- list.remove(val)
+- list.pop([idx]): rmv the last elem, or the elem at idx
+- list.clear()
+- list.index(val, [startIdx, endIdx]): idx of 1st elem with this val, in idx range
+- list.count(val)
+- list.sort(*, key=None, reverse=False)
+- list.reverse()
+- list.copy(): shallow copy
 
 ### 5.1.1 Using Lists as Stacks
+- list.append(val)
+- list.pop()
+
 ### 5.1.2 Using Lists as Queues
 ### 5.1.3 List Comprehensions
 ### 5.1.4 Nested List Comprehensions
