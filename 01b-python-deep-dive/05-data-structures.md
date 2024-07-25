@@ -17,6 +17,19 @@
 - list.pop()
 
 ### 5.1.2 Using Lists as Queues
+Should not use list to achieve this, because add/rmv elem at the beginning of the list is slow. Should use deque module:
+```py
+from collections import deque
+
+queue = deque(["Eric", "John", "Michael"])
+queue.append("Terry")     # Terry arrives
+queue.append("Graham")    # Graham arrives
+queue.popleft()           # Eric
+queue.popleft()           # John
+print(queue)
+# deque(['Michael', 'Terry', 'Graham'])
+```
+
 ### 5.1.3 List Comprehensions
 ### 5.1.4 Nested List Comprehensions
 ## 5.2 The del statement
