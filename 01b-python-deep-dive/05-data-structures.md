@@ -31,7 +31,20 @@ print(queue)
 ```
 
 ### 5.1.3 List Comprehensions
+```python
+squares = []
+for x in range(10):
+    squares.append(x**2)
+
+# it can be replaced by:
+squares = list(map(lambda x: x**2, range(10)))
+# or replaced by:
+squares = [x**2 for x in range(10)]
+```
+
 ### 5.1.4 Nested List Comprehensions
+skipped 
+
 ## 5.2 The del statement
 ## 5.3 Tuples and Sequences
 ## 5.4 Sets
