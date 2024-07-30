@@ -46,6 +46,23 @@ squares = [x**2 for x in range(10)]
 skipped 
 
 ## 5.2 The del statement
+```py
+a = [-1, 1, 66.25, 333, 333, 1234.5]
+
+# Remove an item from a list given its index
+del a[0] # [1, 66.25, 333, 333, 1234.5]
+
+# rmv a slice from arr
+del a[2:4] # [1, 66.25, 1234.5]
+
+# rmv all vals
+del a[:] # []
+
+# delete entire variable
+del a
+
+```
+
 ## 5.3 Tuples and Sequences
 ## 5.4 Sets
 ## 5.5 Dictionaries
