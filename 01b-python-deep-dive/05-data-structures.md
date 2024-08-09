@@ -64,6 +64,14 @@ del a
 ```
 
 ## 5.3 Tuples and Sequences
+A sequence data type, such as list/tuple/range. Tuples are immutable, but they can contain mutable objects such as lists: `v = ([1, 2, 3], [3, 2, 1])`. 
+
+Tuples are immutable, and usually contain a heterogeneous sequence of elements that are accessed via unpacking/indexing, or even by attribute in the case of namedtuples. Lists are mutable, and their elements are usually homogeneous and are accessed by iterating over the list.
+
+The statement `t = 12345, 54321, 'hello!'` is an example of tuple packing - the values 12345, 54321 and 'hello!' are packed together in a tuple. The reverse operation is also possible: `x, y, z = t`.
+
+Note that multiple assignment is really just a combination of tuple packing and sequence unpacking.
+
 ## 5.4 Sets
 ## 5.5 Dictionaries
 ## 5.6 Looping Techniques
