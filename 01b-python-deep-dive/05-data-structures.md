@@ -73,7 +73,44 @@ The statement `t = 12345, 54321, 'hello!'` is an example of tuple packing - the 
 Note that multiple assignment is really just a combination of tuple packing and sequence unpacking.
 
 ## 5.4 Sets
+Basic uses include membership testing and eliminating duplicate entries. Set objects also support mathematical operations like union, intersection, difference, and symmetric difference.
+
+```py
+basket = {'apple', 'orange', 'apple', 'pear', 'orange', 'banana'}
+print(basket) # {'orange', 'banana', 'pear', 'apple'}
+'orange' in basket # True
+'crabgrass' in basket # False
+
+# Demonstrate set operations on unique letters from two words
+a = set('abracadabra')
+b = set('alacazam')
+a # {'a', 'r', 'b', 'c', 'd'}
+a - b   # {'r', 'd', 'b'} in a but not in b
+a | b   # {'a', 'c', 'r', 'd', 'b', 'm', 'z', 'l'} in a or b, or both
+a & b   # {'a', 'c'} in a and in b
+a ^ b   # {'r', 'd', 'b', 'm', 'z', 'l'} in a or b, but not both
+
+a = {x for x in 'abracadabra' if x not in 'abc'}
+a # {'r', 'd'}
+```
+
 ## 5.5 Dictionaries
 ## 5.6 Looping Techniques
 ## 5.7 More on Conditions
 ## 5.8 Comparing Sequences and Other Types
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
