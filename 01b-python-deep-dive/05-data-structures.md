@@ -164,23 +164,8 @@ filtered_data # [56.2, 51.7, 55.3, 52.5, 47.8]
 ```
 
 ## 5.7 More on Conditions
-
-
+skipped
 
 ## 5.8 Comparing Sequences and Other Types
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+skipped
 
