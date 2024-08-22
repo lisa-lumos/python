@@ -6,6 +6,23 @@ To support this, Python has a way to put definitions in a file and use them else
 The file name is the module name with the suffix .py appended. Within a module, the module's name (as a string) is available as the value of the global variable `__name__`.
 
 ## 6.1 More on Modules
+A module can contain executable statements as well as function definitions. These statements are intended to initialize the module. They are executed only the first time the module name is encountered in an import statement.
+
+Each module has its own private namespace, which is used as the global namespace by all functions defined in the module. Thus, the author of a module can use global variables in the module without worrying about accidental clashes with a user's global variables. You can touch a module's global variables with the same notation used to refer to its functions - `module_name.item_name`.
+
+```py
+import my_module # my_module.my_function()
+
+import my_module as mdl # mdl.my_function()
+
+from my_module import my_function # my_function()
+
+from my_module import my_function as my_func # my_func()
+
+from my_module import * # discouraged to use this, may introduce unknown names to code, and not readable
+
+```
+
 ### 6.1.1 Executing modules as scripts
 ### 6.1.2 The Module Search Path
 ### 6.1.3 "Compiled" Python files
