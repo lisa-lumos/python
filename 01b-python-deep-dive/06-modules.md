@@ -24,7 +24,19 @@ from my_module import * # discouraged to use this, may introduce unknown names t
 ```
 
 ### 6.1.1 Executing modules as scripts
+by adding this code at the end of your module:
+```py
+if __name__ == "__main__": # only runs if the script is passed to python cmd
+    import sys
+    fib(int(sys.argv[1]))
+```
+you can make the file usable as a script as well as an importable module.
+
+This is often used either to provide a convenient UI to a module, or for testing purposes (running the module as a script).
+
 ### 6.1.2 The Module Search Path
+
+
 ### 6.1.3 "Compiled" Python files
 
 ## 6.2 Standard Modules
