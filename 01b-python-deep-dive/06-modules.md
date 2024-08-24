@@ -43,6 +43,13 @@ When a module named "spam" is imported, the interpreter first searches for a bui
 - The installation-dependent default (by convention including a `site-packages` dir, handled by the site module).
 
 ### 6.1.3 "Compiled" Python files
+To speed up loading modules, Python caches the compiled version of each module in the "__pycache__/module.version.pyc" file. 
+
+Python checks the modification date of the source against the compiled version to see if it's out of date and needs to be recompiled. This is a completely automatic process. 
+
+The compiled modules are `platform-independent`, so the same library can be shared among systems with different architectures.
+
+To support a non-source (compiled only) distribution, the compiled module must be in the source directory, and there must not be a source module.
 
 ## 6.2 Standard Modules
 
