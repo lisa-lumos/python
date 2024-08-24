@@ -35,7 +35,12 @@ you can make the file usable as a script as well as an importable module.
 This is often used either to provide a convenient UI to a module, or for testing purposes (running the module as a script).
 
 ### 6.1.2 The Module Search Path
+When a module named "spam" is imported, the interpreter first searches for a built-in module with that name. These module names are listed in `sys.builtin_module_names`. If not found, it then searches for a file named "spam.py" in a list of directories given by the var `sys.path`. 
 
+`sys.path` is initialized from these locations:
+- The dir containing the input script (or the current dir when no file is specified).
+- `PYTHONPATH` (a list of dir names, with the same syntax as the shell variable PATH).
+- The installation-dependent default (by convention including a `site-packages` dir, handled by the site module).
 
 ### 6.1.3 "Compiled" Python files
 
