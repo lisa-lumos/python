@@ -52,8 +52,29 @@ The compiled modules are `platform-independent`, so the same library can be shar
 To support a non-source (compiled only) distribution, the compiled module must be in the source directory, and there must not be a source module.
 
 ## 6.2 Standard Modules
+The variable `sys.path` is a list of strings that determines the interpreter's search path for modules. It is initialized to a default path taken from the environment variable "PYTHONPATH", or from a built-in default if "PYTHONPATH" is not set. You can modify it using standard list operations:
+```py
+import sys
+sys.path.append('/ufs/guido/lib/python')
+```
 
 ## 6.3 The dir() Function
+The built-in function `dir(module_name)` is used to find out which names a module defines. It returns a sorted list of strings:
+```py
+import fibo, sys
+dir(fibo)
+# ['__name__', 'fib', 'fib2']
+dir(sys)  
+# ['__breakpointhook__', '__displayhook__', '__doc__', '__excepthook__',
+#  '__interactivehook__', '__loader__', '__name__', '__package__', '__spec__',
+#  '__stderr__', '__stdin__', '__stdout__', '__unraisablehook__',
+#  '_clear_type_cache', '_current_frames', '_debugmallocstats', '_framework',
+#  '_getframe', '_git', '_home', 
+```
+
+Without arguments, `dir()` lists the names you have defined currently.
+
+`dir()` does not list the names of built-in functions and variables. If you want a list of those, they are defined in the standard module "builtins".
 
 ## 6.4 Packages
 ### 6.4.1 Importing * From a Package
