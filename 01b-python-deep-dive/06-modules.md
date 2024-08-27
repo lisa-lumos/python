@@ -43,7 +43,7 @@ When a module named "spam" is imported, the interpreter first searches for a bui
 - The installation-dependent default (by convention including a `site-packages` dir, handled by the site module).
 
 ### 6.1.3 "Compiled" Python files
-To speed up loading modules, Python caches the compiled version of each module in the "__pycache__/module.version.pyc" file. 
+To speed up loading modules, Python caches the compiled version of each module in the `__pycache__/module.version.pyc` file. 
 
 Python checks the modification date of the source against the compiled version to see if it's out of date and needs to be recompiled. This is a completely automatic process. 
 
@@ -77,6 +77,63 @@ Without arguments, `dir()` lists the names you have defined currently.
 `dir()` does not list the names of built-in functions and variables. If you want a list of those, they are defined in the standard module "builtins".
 
 ## 6.4 Packages
+Packages are a way of structuring Python's module namespace by using "dotted module names". For example, the module name "package_name.submodule_name".
+
+The use of dotted module names saves the authors of multi-module packages like NumPy or Pillow from having to worry about each other's module names.
+
+Example package structure: 
+```
+sound/                          Top-level package
+      __init__.py               Initialize the sound package
+      formats/                  Subpackage for file format conversions
+              __init__.py
+              wavread.py
+              wavwrite.py
+              aiffread.py
+              aiffwrite.py
+              auread.py
+              auwrite.py
+              ...
+      effects/                  Subpackage for sound effects
+              __init__.py
+              echo.py           A module in the subpackage
+              surround.py
+              reverse.py
+              ...
+      filters/                  Subpackage for filters
+              __init__.py
+              equalizer.py
+              vocoder.py
+              karaoke.py
+              ...
+```
+
+The `__init__.py` files are required to make Python treat dirs containing the file as packages (unless using a "namespace package", a relatively advanced feature). 
+
+This prevents directories with a common name, such as string, from unintentionally hiding valid modules that occur later on the module search path. In the simplest case, `__init__.py` can just be an empty file, but it can also execute initialization code for the package or set the `__all__` variable.
+
+```py
+# import individual modules from the package
+# below must be referenced with its full name
+import sound.effects.echo #  loads the submodule sound.effects.echo.
+sound.effects.echo.echofilter(input, output, delay=0.7, atten=4)
+
+# loads the submodule echo, and makes it available without its package prefix
+from sound.effects import echo
+echo.echofilter(input, output, delay=0.7, atten=4)
+
+# import the desired function or variable directly
+from sound.effects.echo import echofilter
+echofilter(input, output, delay=0.7, atten=4) # makes its function directly available
+```
+
+Note that when using `from package import item`, the item can be a submodule/subpackage of the package, or some other name defined in the package, like a function/class/variable. 
+
+The import statement:
+1. First tests whether the item is defined in the package; 
+2. If not, it assumes it is a module, and attempts to load it. 
+3. If it fails to find it, an ImportError exception is raised.
+
 ### 6.4.1 Importing * From a Package
 ### 6.4.2 Intra-package References
 ### 6.4.3 Packages in Multiple Directories
