@@ -135,22 +135,31 @@ The import statement:
 3. If it fails to find it, an ImportError exception is raised.
 
 ### 6.4.1 Importing * From a Package
+if a package's `__init__.py` code defines a list named `__all__`, it is taken to be the list of module names that should be imported when `from package import *` is encountered. 
+
+It is up to the package author to keep this list up-to-date, when a new version of the package is released. Package authors may also decide not to support it, if they don't see a use for `importing *` from their package. 
+
+For example, the file `sound/effects/__init__.py` could contain:
+```
+__all__ = ["echo", "surround", "reverse"]
+```
+
+This would mean that `from sound.effects import *` would import the 3 named submodules of the "sound.effects" package.
+
+Submodules might become shadowed by locally defined names. For example, if you added a `reverse()` function to the `sound/effects/__init__.py` file, the `from sound.effects import *` would only import the two submodules `echo` and `surround`, but not the `reverse` submodule, because it is shadowed by the locally defined `(reverse)` function. 
+
+Although certain modules are designed to export only names that follow certain patterns when you use `import *`, it is still considered bad practice in production code.
+
 ### 6.4.2 Intra-package References
+When packages are structured into subpackages, you can use absolute imports to refer to submodules of siblings packages. e.g.: `sound.filters.vocoder` needs to use the echo module in the `sound.effects` package, it can use `from sound.effects import echo`.
+
+You can also use relative imports:
+```py
+from . import echo # from current package
+from .. import formats # from parent package
+from ..filters import equalizer
+```
+
 ### 6.4.3 Packages in Multiple Directories
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+Packages support one more special attribute `__path__`. This is initialized to be a list containing the name of the directory holding the package's `__init__.py` before the code in that file is executed. This variable can be modified; doing so affects future searches for modules and subpackages contained in the package.
 
