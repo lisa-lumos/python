@@ -58,6 +58,10 @@ for arg in sys.argv[1:]:
         print(arg, 'has', len(f.readlines()), 'lines')
         f.close()
 
+# to force a specified exception to occur:
+raise NameError('HiThere')
+
+
 ```
 
 ## 8.4 Raising Exceptions
