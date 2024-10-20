@@ -7,7 +7,15 @@ Python classes provide all the standard features of Object Oriented Programming:
 - objects can contain arbitrary amounts and kinds of data
 
 ## 9.1 A Word About Names and Objects
+skipped.
+
 ## 9.2 Python Scopes and Namespaces
+Strictly speaking, references to names in modules are attribute refs: in the expression `module_name.func_name`, `module_name` is a module object and `func_name` is an attribute of it.
+
+Attributes may be read-only or writable. If writable, assignment to attributes is possible. Module attributes are writable, e.g. `module_name.the_answer = 42`. Writable attributes may also be deleted with `del`, e.g., `del module_name.the_answer` will remove the attribute the_answer from the object named by `module_name`.
+
+The statements executed by the top-level invocation of the interpreter, either read from a script file or interactively, are considered part of a module called `__main__`, so they have their own global namespace. 
+
 ### 9.2.1 Scopes and Namespaces Example
 ## 9.3 A First Look at Classes
 ### 9.3.1 Class Definition Syntax
