@@ -17,6 +17,36 @@ Attributes may be read-only or writable. If writable, assignment to attributes i
 The statements executed by the top-level invocation of the interpreter, either read from a script file or interactively, are considered part of a module called `__main__`, so they have their own global namespace. 
 
 ### 9.2.1 Scopes and Namespaces Example
+```py
+def scope_test():
+    def do_local():
+        spam = "local spam"
+
+    def do_nonlocal():
+        nonlocal spam
+        spam = "nonlocal spam"
+
+    def do_global():
+        global spam
+        spam = "global spam"
+
+    spam = "test spam"
+    do_local()
+    print("After local assignment:", spam)
+    do_nonlocal()
+    print("After nonlocal assignment:", spam)
+    do_global()
+    print("After global assignment:", spam)
+
+scope_test()
+# After local assignment: test spam
+# After nonlocal assignment: nonlocal spam
+# After global assignment: nonlocal spam
+
+print("In global scope:", spam)
+# In global scope: global spam
+```
+
 ## 9.3 A First Look at Classes
 ### 9.3.1 Class Definition Syntax
 ### 9.3.2 Class Objects
