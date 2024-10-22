@@ -50,6 +50,17 @@ print("In global scope:", spam)
 ## 9.3 A First Look at Classes
 ### 9.3.1 Class Definition Syntax
 ### 9.3.2 Class Objects
+```py
+class Complex:
+    def __init__(self, realpart, imagpart):
+        self.r = realpart
+        self.i = imagpart
+
+x = Complex(3.0, -4.5)
+x.r, x.i
+# (3.0, -4.5)
+```
+
 ### 9.3.3 Instance Objects
 ### 9.3.4 Method Objects
 ### 9.3.5 Class and Instance Variables
