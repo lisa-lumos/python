@@ -49,6 +49,8 @@ print("In global scope:", spam)
 
 ## 9.3 A First Look at Classes
 ### 9.3.1 Class Definition Syntax
+skip
+
 ### 9.3.2 Class Objects
 ```py
 class Complex:
@@ -62,8 +64,14 @@ x.r, x.i
 ```
 
 ### 9.3.3 Instance Objects
+Instance of a class.
+
 ### 9.3.4 Method Objects
+skip
+
 ### 9.3.5 Class and Instance Variables
+
+
 ## 9.4 Random Remarks
 ## 9.5 Inheritance
 ### 9.5.1 Multiple Inheritance
