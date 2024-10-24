@@ -70,7 +70,24 @@ Instance of a class.
 skip
 
 ### 9.3.5 Class and Instance Variables
+Instance variables are for data unique to each instance and class variables are for attributes and methods shared by all instances of the class:
+```py
+class Dog:
+    kind = 'canine'         # class variable shared by all instances
+    def __init__(self, name):
+        self.name = name    # instance variable unique to each instance
 
+>>> d = Dog('Fido')
+>>> e = Dog('Buddy')
+>>> d.kind                  # shared by all dogs
+# 'canine'
+>>> e.kind                  # shared by all dogs
+# 'canine'
+>>> d.name                  # unique to d
+# 'Fido'
+>>> e.name                  # unique to e
+# 'Buddy'
+```
 
 ## 9.4 Random Remarks
 ## 9.5 Inheritance
@@ -80,3 +97,15 @@ skip
 ## 9.8 Iterators
 ## 9.9 Generators
 ## 9.10 Generator Expressions
+
+
+
+
+
+
+
+
+
+
+
+
