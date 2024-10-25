@@ -90,7 +90,29 @@ class Dog:
 ```
 
 ## 9.4 Random Remarks
+skip
+
 ## 9.5 Inheritance
+derived class definition looks like this:
+```py
+class DerivedClassName(BaseClassName):
+    # ...
+
+# when the base class is defined in another module:
+class DerivedClassName(module_name.BaseClassName):
+    # ...
+```
+
+Method references are resolved as follows: the derived class is searched, then base classes if necessary.
+
+Derived classes may override methods of their base classes.
+
+An overriding method in a derived class may in fact want to extend, rather than simply replace the base class method. To call the base class method directly: `BaseClassName.method_name(self, arguments)`.
+
+Python has two built-in functions that work with inheritance:
+- `isinstance(obj_name, type_name)` - check an instance's type.
+- `issubclass(class_name, base_class_name)` - check class inheritance.
+
 ### 9.5.1 Multiple Inheritance
 ## 9.6 Private Variables
 ## 9.7 Odds and Ends
