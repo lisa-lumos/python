@@ -114,6 +114,14 @@ Python has two built-in functions that work with inheritance:
 - `issubclass(class_name, base_class_name)` - check class inheritance.
 
 ### 9.5.1 Multiple Inheritance
+A class definition with multiple base classes:
+```py
+class DerivedClassName(Base1, Base2, Base3):
+    # ...
+```
+
+In the simplest cases, the search for attributes inherited from a parent class as depth-first, left-to-right, not searching twice in the same class where there is an overlap in the hierarchy.
+
 ## 9.6 Private Variables
 ## 9.7 Odds and Ends
 ## 9.8 Iterators
