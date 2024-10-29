@@ -153,8 +153,20 @@ The above example would work even if `MappingSubclass` were to introduce a `__up
 Note that the mangling rules are designed mostly to avoid accidents; it still is possible to access or modify a variable that is considered private. 
 
 ## 9.7 Odds and Ends
+To have a data type bundling together a few named data items, use `dataclasses`:
+```py
+from dataclasses import dataclass
 
+@dataclass
+class Employee:
+    name: str
+    dept: str
+    salary: int
 
+john = Employee('john', 'computer lab', 1000)
+john.dept # 'computer lab'
+john.salary # 1000
+```
 ## 9.8 Iterators
 
 
