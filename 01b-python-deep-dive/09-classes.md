@@ -167,8 +167,51 @@ john = Employee('john', 'computer lab', 1000)
 john.dept # 'computer lab'
 john.salary # 1000
 ```
-## 9.8 Iterators
 
+## 9.8 Iterators
+Most container objects can be looped over using a "for" statement. 
+
+Behind the scenes, the for statement calls `iter()` on the container object. The function returns an iterator object that defines the method `__next__()` which accesses elements in the container one at a time. When there are no more elements, `__next__()` raises a `StopIteration exception`, which tells the for loop to terminate. You can call the `__next__()` method using the `next()` built-in function:
+```py
+s = 'abc'
+it = iter(s)
+it # <str_iterator object at 0x10c90e650>
+next(it) # 'a'
+next(it) # 'b'
+next(it) # 'c'
+next(it)
+# Traceback (most recent call last):
+#   File "<stdin>", line 1, in <module>
+#     next(it)
+# StopIteration
+```
+
+To add iterator behavior to your classes:
+```py
+class Reverse:
+    """Iterator for looping over a sequence backwards."""
+    def __init__(self, data):
+        self.data = data
+        self.index = len(data)
+
+    def __iter__(self):
+        return self
+
+    def __next__(self):
+        if self.index == 0:
+            raise StopIteration
+        self.index = self.index - 1
+        return self.data[self.index]
+  
+rev = Reverse('spam')
+iter(rev) # <__main__.Reverse object at 0x00A1DB50>
+for char in rev:
+    print(char)
+# m
+# a
+# p
+# s
+```
 
 ## 9.9 Generators
 
