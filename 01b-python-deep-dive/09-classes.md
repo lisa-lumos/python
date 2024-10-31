@@ -214,7 +214,25 @@ for char in rev:
 ```
 
 ## 9.9 Generators
+Generators are used for creating iterators. They are written like regular functions, but use the `yield` statement whenever they want to return data. Each time `next()` is called on it, the generator resumes where it left off - it remembers all the data values and which statement was last executed:
+```py
+def reverse(data):
+    for index in range(len(data)-1, -1, -1):
+        yield data[index]
 
+for char in reverse('golf'):
+    print(char)
+# f
+# l
+# o
+# g
+
+```
+
+- Anything that can be done with generators can also be done with class-based iterators as described in the previous section. 
+- What makes generators so compact is that the `__iter__()` and `__next__()` methods are created automatically. 
+- the local variables and execution state are automatically saved between calls.
+- When generators terminate, they automatically raise StopIteration.
 
 ## 9.10 Generator Expressions
 
