@@ -62,20 +62,54 @@ When run at the command line with `python top.py --lines=5 alpha.txt beta.txt`, 
 
 
 ## 10.4 Error Output Redirection and Program Termination
+The `sys` module has attributes for `stdin`, `stdout`, and `stderr`. The latter is useful for emitting warnings and error messages, to make them visible, even when `stdout` has been redirected:
 
+```py
+sys.stderr.write('Warning, log file not found starting a new one\n')
+# Warning, log file not found starting a new one
+```
 
+The most direct way to terminate a script is to use `sys.exit()`.
 
 ## 10.5 String Pattern Matching
+```py
+import re
+re.findall(r'\bf[a-z]*', 'which foot or hand fell fastest')
+# ['foot', 'fell', 'fastest']
+re.sub(r'(\b[a-z]+) \1', r'\1', 'cat in the the hat')
+# 'cat in the hat'
 
+# for simple use cases, string methods are preferred,
+# because they are easier to read/debug
+'tea for too'.replace('too', 'two')
+# 'tea for two'
 
+```
 
 ## 10.6 Mathematics
-
+skip
 
 
 ## 10.7 Internet Access
+```py
+from urllib.request import urlopen
+with urlopen('http://worldtimeapi.org/api/timezone/etc/UTC.txt') as response:
+    for line in response:
+        line = line.decode() # Convert bytes to a str
+        if line.startswith('datetime'):
+            print(line.rstrip()) # Remove trailing newline
+            # datetime: 2022-01-01T01:36:47.689215+00:00
 
+import smtplib
+server = smtplib.SMTP('localhost')
+server.sendmail('sender@example.org', 'receiver@example.org',
+"""To: receiver@example.org
+From: sender@example.org
 
+Beware the Ides of March.
+""")
+server.quit()
+```
 
 ## 10.8 Dates and Times
 
