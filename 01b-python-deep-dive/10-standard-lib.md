@@ -138,8 +138,13 @@ zlib.crc32(s) # 226805979
 ```
 
 ## 10.10 Performance Measurement
+```py
+from timeit import Timer
+Timer('t=a; a=b; b=t', 'a=1; b=2').timeit() # 0.57535828626024577
+Timer('a,b = b,a', 'a=1; b=2').timeit() # 0.54962537085770791
+```
 
-
+The `profile` and `pstats` modules provide tools for identifying time critical sections in larger blocks of code.
 
 ## 10.11 Quality Control
 
