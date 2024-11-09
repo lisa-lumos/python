@@ -147,8 +147,36 @@ Timer('a,b = b,a', 'a=1; b=2').timeit() # 0.54962537085770791
 The `profile` and `pstats` modules provide tools for identifying time critical sections in larger blocks of code.
 
 ## 10.11 Quality Control
+The `doctest` module provides a tool for scanning a module and validating tests embedded in a program's docstrings. 
+```py
+def average(values):
+    """Computes the arithmetic mean of a list of numbers.
 
+    >>> print(average([20, 30, 70]))
+    40.0
+    """
+    return sum(values) / len(values)
 
+import doctest
+doctest.testmod()   # automatically validate the embedded tests
+
+```
+
+The unittest module allows for maintaining tests in a separate file:
+```py
+import unittest
+
+class TestStatisticalFunctions(unittest.TestCase):
+    def test_average(self):
+        self.assertEqual(average([20, 30, 70]), 40.0)
+        self.assertEqual(round(average([1, 5, 7]), 1), 4.3)
+        with self.assertRaises(ZeroDivisionError):
+            average([])
+        with self.assertRaises(TypeError):
+            average(20, 30, 70)
+
+unittest.main()  # Calling from the command line invokes all tests
+```
 
 ## 10.12 Batteries Included
 
