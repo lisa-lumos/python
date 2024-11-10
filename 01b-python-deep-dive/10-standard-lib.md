@@ -179,6 +179,4 @@ unittest.main()  # Calling from the command line invokes all tests
 ```
 
 ## 10.12 Batteries Included
-
-
-
+Python provides a large standard library, that comes with the Python installation. Many commonly used modules and tools for tasks like file I/O, data manipulation, networking, web development, and more are readily available, without needing to install third-party libraries.
