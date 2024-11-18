@@ -133,9 +133,20 @@ The principal challenge of multi-threaded applications is coordinating threads t
 While those tools are powerful, minor design errors can result in problems that are difficult to reproduce. So, the preferred approach to task coordination, is to concentrate all access to a resource in a single thread and then use the queue module to feed that thread with requests from other threads. Applications using Queue objects for inter-thread communication and coordination are easier to design, more readable, and more reliable.
 
 ## 11.5 Logging
+By default, informational and debugging messages are suppressed, and log messages are sent to a file or to `sys.stderr`. Other output options include routing messages through email, datagrams, sockets, or to an HTTP Server.
+```py
+import logging
+logging.debug('Debugging information')
+logging.info('Informational message')
+logging.warning('Warning:config file %s not found', 'server.conf')
+# WARNING:root:Warning:config file server.conf not found
+logging.error('Error occurred')
+# ERROR:root:Error occurred
+logging.critical('Critical error -- shutting down')
+# CRITICAL:root:Critical error -- shutting down
+```
 
-
-
+The logging system can be configured directly from Python, or can be loaded from a user editable configuration file for customized logging without altering the application.
 
 ## 11.6 Weak References
 
