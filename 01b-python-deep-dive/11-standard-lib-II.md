@@ -149,9 +149,33 @@ logging.critical('Critical error -- shutting down')
 The logging system can be configured directly from Python, or can be loaded from a user editable configuration file for customized logging without altering the application.
 
 ## 11.6 Weak References
+The memory for an object is freed shortly after the last reference to it has been eliminated. Occasionally there is a need to track objects only as long as they are being used by something else, which creates a reference that makes them permanent. The `weakref` module provides tools for tracking objects without creating a reference. 
 
+Typical applications include caching objects that are expensive to create:
+```py
+import weakref, gc
+class A:
+    def __init__(self, value):
+        self.value = value
+    def __repr__(self):
+        return str(self.value)
 
-
+a = A(10) # create a reference
+d = weakref.WeakValueDictionary()
+d['primary'] = a # does not create a reference
+d['primary'] # fetch the object if it is still alive
+# 10
+del a # remove the one reference
+gc.collect() # run garbage collection right away
+# 0
+d['primary'] # entry was automatically removed
+# Traceback (most recent call last):
+#   File "<stdin>", line 1, in <module>
+#     d['primary']                # entry was automatically removed
+#   File "C:/python312/lib/weakref.py", line 46, in __getitem__
+#     o = self.data[key]()
+# KeyError: 'primary'
+```
 
 ## 11.7 Tools for Working with Lists
 
