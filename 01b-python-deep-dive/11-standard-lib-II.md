@@ -219,6 +219,29 @@ heappush(data, -5) # add a new entry
 ```
 
 ## 11.8 Decimal Floating Point Arithmetic
+The decimal module offers a Decimal datatype for decimal floating-point arithmetic. Compared to the built-in float implementation of binary floating point, the class is especially helpful for
+- financial applications etc which require exact decimal representation,
+- control over precision,
+- control over rounding to meet legal or regulatory requirements,
+- tracking of significant decimal places, or
+- applications where the user expects the results to match calculations done by hand.
+
+```py
+from decimal import *
+round(Decimal('0.70') * Decimal('1.05'), 2) # Decimal('0.74')
+round(.70 * 1.05, 2) # 0.73
+
+Decimal('1.00') % Decimal('.10') # Decimal('0.00')
+1.00 % 0.10 # 0.09999999999999995
+
+sum([Decimal('0.1')]*10) == Decimal('1.0')
+# True
+0.1 + 0.1 + 0.1 + 0.1 + 0.1 + 0.1 + 0.1 + 0.1 + 0.1 + 0.1 == 1.0
+# False
 
 
+# The decimal module provides arithmetic with as much precision as needed:
+getcontext().prec = 36
+Decimal(1) / Decimal(7) # Decimal('0.142857142857142857142857142857142857')
 
+```
