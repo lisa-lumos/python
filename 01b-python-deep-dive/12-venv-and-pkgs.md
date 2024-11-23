@@ -9,8 +9,16 @@ A virtual environment is a self-contained directory tree, that contains a Python
 Different applications can then use different virtual environments. 
 
 ## 12.2 Creating Virtual Environments
+`venv` will install the Python version from which the command was run. A common directory location for a virtual environment is ".venv", which keeps the directory hidden in your shell, and thus out of the way. 
 
+```sh
+cd [path-to-venv]
+python -m venv tutorial-env
 
+source tutorial-env/bin/activate
+
+deactivate
+```
 
 ## 12.3 Managing Packages with pip
 
